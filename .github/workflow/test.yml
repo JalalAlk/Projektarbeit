@@ -1,7 +1,8 @@
 on: push
 
 jobs:
-  first-job: windos-latest
+  first-job: 
+  runs-on: windos-latest
   steps:
     - run: node --version
     - run: npm --version
