@@ -2,4 +2,7 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 //test
-export default defineConfig({});
+export default defineConfig({
+    site: 'https://Projektarbeit.github.io',
+    
+});
