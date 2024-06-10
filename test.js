@@ -4,6 +4,5 @@ function add(a, b) {
   }
   
   const result = add(5, 10);
-  console.log("Das Ergebnis ist: " + result)
+  console.log("Das Ergebnis ist: " + result):
   
-  //

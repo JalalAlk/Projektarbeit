@@ -8,18 +8,14 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint": "eslint . && eslint . --fix"
   },
   "dependencies": {
     "open": "^10.1.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.4.0",
     "astro": "^4.10.1",
     "astro-eslint-parser": "^1.0.2",
-    "eslint": "^9.4.0",
-    "eslint-plugin-astro": "^1.2.0",
     "globals": "^15.4.0"
   },
   "description": "```sh npm create astro@latest -- --template basics ```",
