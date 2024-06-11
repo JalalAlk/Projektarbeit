@@ -25,7 +25,7 @@ jobs:
       - name: Run ESLint
         run: npx eslint .
       - name: Run Stylelint
-        run: npx stylelint "**/*.css"
+        run: npx stylelint 
       - name: Run HTMLHint
         run: npx htmlhint "**/*.html"
       - name: Run Astro Lint
