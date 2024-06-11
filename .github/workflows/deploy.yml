@@ -37,8 +37,10 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
-      - name: Install, build, and upload your site
-        uses: withastro/action@v2
+      - name: Install dependencies
+        run: npm install
+      - name: Build your site
+        run: npx astro build
 
   deploy:
     needs: build
@@ -47,6 +49,8 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v4
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
