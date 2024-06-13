@@ -20,7 +20,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20'
+          node-version: '20'  # Node.js version
 
       - name: Install dependencies
         run: npm install
@@ -48,13 +48,16 @@ jobs:
         run: npm install
 
       - name: Build your site with Astro
-        run: npx astro build
+        run: |
+          echo "Building site with Astro..."
+          npx astro build
+          ls -la ./dist  # Überprüfen, ob das Verzeichnis existiert und Dateien enthält
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: github-pages  # Updated artifact name to match deployment
-          path: dist  # Ensure this is the correct path to your build output
+          name: github-pages
+          path: dist
 
   test:
     runs-on: ubuntu-latest
@@ -71,9 +74,6 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
@@ -81,7 +81,7 @@ jobs:
       - name: Download Build Artifact
         uses: actions/download-artifact@v4
         with:
-          name: github-pages  
+          name: github-pages
           path: .
 
       - name: List downloaded files
@@ -89,5 +89,7 @@ jobs:
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
-
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: dist
