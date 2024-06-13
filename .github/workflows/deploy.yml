@@ -53,7 +53,7 @@ jobs:
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: astro-build
+          name: github-pages  # Updated artifact name to match deployment
           path: dist  # Ensure this is the correct path to your build output
 
   test:
@@ -65,7 +65,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
         env:
           CI: true
 
@@ -82,7 +81,7 @@ jobs:
       - name: Download Build Artifact
         uses: actions/download-artifact@v4
         with:
-          name: astro-build
+          name: github-pages  # Ensure this matches the artifact name used in upload step
           path: .
 
       - name: List downloaded files
@@ -91,4 +90,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        
