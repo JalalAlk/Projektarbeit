@@ -86,7 +86,13 @@ jobs:
 
       - name: List downloaded files
         run: ls -l
+      - name: Remove unwanted files
+        run: |
+          rm -rf dist/*.svg  # Remove SVG files from dist
+          rm -rf dist/node_modules  # Remove node_modules from dist
+
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        
