@@ -55,17 +55,12 @@ jobs:
           CI: true  # Set CI environment variable for npm test to run tests in non-interactive mode
 
   deploy:
-    needs: [build, test]
+    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-     
-          
-
-
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

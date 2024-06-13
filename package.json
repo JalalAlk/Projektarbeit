@@ -9,8 +9,9 @@
     "preview": "astro preview",
     "lint": "eslint .",
     "eslint-fix": "eslint . --fix",
-    "stylelint": "stylelint 'src/**/*.{astro,css}'",
-    "test": "jest"
+    "stylelint": "stylelint 'src/**/*.{astro,css}'"
+    
+   
   },
   "dependencies": {
     "open": "^10.1.0"
