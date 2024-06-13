@@ -54,7 +54,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: astro-build
-          path: dist  # Verzeichnis, das die gebauten Dateien enthält
+          path: dist  # Ensure this is the correct path to your build output
 
   test:
     runs-on: ubuntu-latest
@@ -67,7 +67,7 @@ jobs:
         run: npm install
 
         env:
-          CI: true  # Set CI environment variable for npm test to run tests in non-interactive mode
+          CI: true
 
   deploy:
     needs: build
@@ -76,15 +76,19 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v4
+
       - name: Download Build Artifact
         uses: actions/download-artifact@v4
         with:
           name: astro-build
-          path: dist  # Stelle sicher, dass der Pfad existiert und korrekt ist
+          path: .
 
       - name: List downloaded files
-        run: ls -l dist
+        run: ls -l
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        
