@@ -70,7 +70,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: astro-build
-          path: actions/deploy-pages@v4
+          path: .github/workflows/deploy.yml
 
       - name: Deploy to GitHub Pages
         id: deployment
