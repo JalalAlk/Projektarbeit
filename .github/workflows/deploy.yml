@@ -51,7 +51,8 @@ jobs:
         run: |
           echo "Building site with Astro..."
           npx astro build
-          ls -la ./dist  # Überprüfen, ob das Verzeichnis existiert und Dateien enthält
+          echo "Contents of the build directory:"
+          ls -la ./dist || echo "Directory not found" # Überprüfen, ob das Verzeichnis existiert
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
@@ -74,6 +75,9 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
@@ -89,7 +93,5 @@ jobs:
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: JamesIves/github-pages-deploy-action@4.1.4
-        with:
-          branch: gh-pages
-          folder: dist
+        uses: actions/deploy-pages@v4
+        
