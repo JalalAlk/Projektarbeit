@@ -9,8 +9,7 @@
     "preview": "astro preview",
     "lint": "eslint .",
     "eslint-fix": "eslint . --fix",
-    "stylelint": "stylelint '**/*.css'"
-
+    "stylelint": "stylelint 'src/**/*.{astro,css}'"
   },
   "dependencies": {
     "open": "^10.1.0"
@@ -21,7 +20,9 @@
     "eslint": "^9.4.0",
     "eslint-plugin-astro": "^1.2.2",
     "globals": "^15.4.0",
+    "postcss-html": "^1.7.0",
     "stylelint": "^16.6.1",
+    "stylelint-config-html": "^1.1.0",
     "stylelint-config-standard": "^36.0.0"
   }
 }

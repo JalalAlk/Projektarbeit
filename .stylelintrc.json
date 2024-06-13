@@ -1,13 +1,16 @@
 {
-    "extends": "stylelint-config-standard",
+    "extends": [
+      "stylelint-config-html/astro"
+    ],
+    "overrides": [
+      {
+        "files": ["**/*.astro"],
+        "customSyntax": "postcss-html"
+      }
+    ],
     "rules": {
-      "indentation": 2,
-      "string-quotes": "single",
       "block-no-empty": true,
-      "color-no-invalid-hex": true,
-      "declaration-colon-space-after": "always",
-      "max-empty-lines": 2,
-      "unit-whitelist": ["em", "rem", "%", "s"]
+      "color-no-invalid-hex": true
     }
   }
   
