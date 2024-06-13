@@ -51,7 +51,7 @@ jobs:
         run: npx astro build
 
       - name: Upload Build Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: github-pages  # Updated artifact name to match deployment
           path: dist  # Ensure this is the correct path to your build output
@@ -71,22 +71,23 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
 
       - name: Download Build Artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
-          name: github-pages  # Name of the artifact to download
-          path: dist  # Local path to download the artifact contents
+          name: github-pages  
+          path: .
 
       - name: List downloaded files
-        run: ls -l dist  # List files in the dist directory
+        run: ls -l
 
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.5
-        with:
-          branch: gh-pages  # Target branch for deployment
-          folder: dist  # Path to the directory containing your build output
-          token: ${{ secrets.GITHUB_TOKEN }}
+        id: deployment
+        uses: actions/deploy-pages@v4
+
