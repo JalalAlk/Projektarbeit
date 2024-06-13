@@ -5,13 +5,12 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "npm run clean && astro build",
     "preview": "astro preview",
     "lint": "eslint .",
     "eslint-fix": "eslint . --fix",
-    "stylelint": "stylelint 'src/**/*.{astro,css}'"
-    
-   
+    "stylelint": "stylelint 'src/**/*.{astro,css}'",
+    "clean": "find ./dist -type f -not -name '*.html' -exec rm {} + && find ./dist -type d -empty -delete"
   },
   "dependencies": {
     "open": "^10.1.0"
