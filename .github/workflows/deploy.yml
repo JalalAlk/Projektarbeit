@@ -16,24 +16,18 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
-
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'  # Beispiel: Node.js Version anpassen
-
+          node-version: '20'
       - name: Install dependencies
         run: npm install
-
       - name: Run ESLint
         run: npx eslint .
-
       - name: Run Stylelint
         run: npx stylelint "src/**/*.astro"
-
       - name: Run HTMLHint
         run: npx htmlhint "**/*.html"
-
       - name: Run Astro Lint
         run: npx astro lint
 
@@ -43,18 +37,10 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
-
       - name: Install dependencies
         run: npm install
-
       - name: Build your site with Astro
         run: npx astro build
-
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: astro-build
-          path: .  # Hier den Pfad zum Build-Artefakt anpassen
 
   test:
     runs-on: ubuntu-latest
@@ -62,15 +48,13 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
-
       - name: Install dependencies
         run: npm install
-          
         env:
           CI: true  # Set CI environment variable for npm test to run tests in non-interactive mode
 
   deploy:
-    needs: build
+    needs: [build, test]
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -80,7 +64,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: astro-build
-          path: .  # Hier den Pfad zum heruntergeladenen Artefakt anpassen
+          path: .
 
       - name: Deploy to GitHub Pages
         id: deployment
