@@ -81,13 +81,8 @@ jobs:
           name: github-pages  # Name of the artifact to download
           path: dist  # Local path to download the artifact contents
 
-      - name: Remove unwanted files
-        run: |
-          rm -rf dist/*.svg  # Remove SVG files from dist
-          rm -rf dist/node_modules  # Remove node_modules from dist
-
       - name: List downloaded files
-        run: ls -l
+        run: ls -l dist  # List files in the dist directory
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.5
