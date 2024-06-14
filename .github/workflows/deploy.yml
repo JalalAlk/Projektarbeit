@@ -5,13 +5,17 @@ on:
     branches: [main]
   workflow_dispatch:
 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
+jobs:
+  lint:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout des Repositories
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Einrichten von Node.js
         uses: actions/setup-node@v2
@@ -21,17 +25,72 @@ jobs:
       - name: Installieren der Abhängigkeiten
         run: npm install
 
+      - name: Ausführen von ESLint
+        run: npx eslint .
+
+      - name: Ausführen von Stylelint
+        run: npx stylelint "src/**/*.astro"
+
+      - name: Ausführen von HTMLHint
+        run: npx htmlhint "**/*.html"
+
+      - name: Ausführen von Astro Lint
+        run: npx astro lint
+
+  build:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout des Repositories
+        uses: actions/checkout@v4
+
+      - name: Installieren der Abhängigkeiten
+        run: npm install
+
       - name: Build der Webseite mit Astro
         run: |
+          echo "Webseite wird mit Astro gebaut..."
           npx astro build
-          echo "Inhalt des dist-Verzeichnisses:"
-          ls -la dist/
+          touch dist/.nojekyll  # Fügt die .nojekyll Datei hinzu
+          echo "Inhalt des Build-Verzeichnisses:"
+          ls -la ./dist || echo "Verzeichnis nicht gefunden" # Überprüfen, ob das Verzeichnis existiert
 
-      - name: Deployen auf GitHub Pages
-        run: |
-          git config --global user.email "github-actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git checkout --orphan gh-pages
-          git --no-pager log --oneline
-          git --no-pager log --oneline --format=format:"%an" | sort -u
-          npm run build -- -prod
+      - name: Hochladen des Build-Artefakts
+        uses: actions/upload-artifact@v2
+        with:
+          name: github-pages
+          path: dist
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout des Repositories
+        uses: actions/checkout@v4
+
+      - name: Installieren der Abhängigkeiten
+        run: npm install
+        env:
+          CI: true
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout des Repositories
+        uses: actions/checkout@v4
+
+      - name: Herunterladen des Build-Artefakts
+        uses: actions/download-artifact@v2
+        with:
+          name: github-pages
+          path: .
+
+      - name: Auflisten der heruntergeladenen Dateien
+        run: ls -l
+
+      - name: Deployment auf GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist 
