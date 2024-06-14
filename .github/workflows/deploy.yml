@@ -51,6 +51,7 @@ jobs:
         run: |
           echo "Building site with Astro..."
           npx astro build
+          touch dist/.nojekyll  # Fügt die .nojekyll Datei hinzu
           echo "Contents of the build directory:"
           ls -la ./dist || echo "Directory not found" # Überprüfen, ob das Verzeichnis existiert
 
@@ -94,4 +95,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        
+          # Ordner, der bereitgestellt werden soll
