@@ -51,6 +51,17 @@ jobs:
           echo "Inhalt des Build-Verzeichnisses:"
           ls -la dist || echo "Verzeichnis nicht gefunden" # Überprüfen, ob das Verzeichnis existiert
 
+          
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm install
+        env:
+          CI: true  # Set CI environment variable for npm test to run tests in non-interactive mode
   deploy:
     needs: build
     runs-on: ubuntu-22.04
@@ -80,7 +91,7 @@ jobs:
           touch dist/.nojekyll  # Fügt die .nojekyll Datei hinzu
           echo "Inhalt des Build-Verzeichnisses:"
           ls -la dist || echo "Verzeichnis nicht gefunden" # Überprüfen, ob das Verzeichnis existiert
-
+     
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         if: github.ref == 'refs/heads/main'
