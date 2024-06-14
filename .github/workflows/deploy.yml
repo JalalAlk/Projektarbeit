@@ -64,21 +64,25 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout des Repositories
         uses: actions/checkout@v4
 
       - name: Herunterladen des Build-Artefakts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v2
         with:
           name: github-pages
-          path: dist
+          path: ./dist
 
       - name: Auflisten der heruntergeladenen Dateien
         run: ls -l dist
 
       - name: Deployment auf GitHub Pages
+        id: deployment
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist 
+          publish_dir: ./dist  # Das Verzeichnis, das veröffentlicht werden soll
