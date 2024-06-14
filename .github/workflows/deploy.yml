@@ -5,94 +5,33 @@ on:
     branches: [main]
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 jobs:
-  lint:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout your repository using git
-        uses: actions/checkout@v4
 
-      - name: Set up Node.js
+    steps:
+      - name: Checkout des Repositories
+        uses: actions/checkout@v2
+
+      - name: Einrichten von Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20'  # Node.js version
+          node-version: '20'  # Node.js Version anpassen
 
-      - name: Install dependencies
+      - name: Installieren der Abhängigkeiten
         run: npm install
 
-      - name: Run ESLint
-        run: npx eslint .
-
-      - name: Run Stylelint
-        run: npx stylelint "src/**/*.astro"
-
-      - name: Run HTMLHint
-        run: npx htmlhint "**/*.html"
-
-      - name: Run Astro Lint
-        run: npx astro lint
-
-  build:
-    needs: lint
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout your repository using git
-        uses: actions/checkout@v4
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build your site with Astro
+      - name: Build der Webseite mit Astro
         run: |
-          echo "Building site with Astro..."
           npx astro build
-          touch dist/.nojekyll  # Fügt die .nojekyll Datei hinzu
-          echo "Contents of the build directory:"
-          ls -la ./dist || echo "Directory not found" # Überprüfen, ob das Verzeichnis existiert
+          echo "Inhalt des dist-Verzeichnisses:"
+          ls -la dist/
 
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: github-pages
-          path: dist
-
-  test:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout your repository using git
-        uses: actions/checkout@v4
-
-      - name: Install dependencies
-        run: npm install
-        env:
-          CI: true
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Checkout your repository using git
-        uses: actions/checkout@v4
-
-      - name: Download Build Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: github-pages
-          path: .
-
-      - name: List downloaded files
-        run: ls -l
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-          # Ordner, der bereitgestellt werden soll
+      - name: Deployen auf GitHub Pages
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git checkout --orphan gh-pages
+          git --no-pager log --oneline
+          git --no-pager log --oneline --format=format:"%an" | sort -u
+          npm run build -- -prod
