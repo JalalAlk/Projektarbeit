@@ -1,14 +1,10 @@
-name: Deploy to GitHub Pages
+name: GitHub Pages Astro CI
 
 on:
   push:
-    branches: [main]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+    branches:
+      - main  # Setze den Branch-Namen, um die Bereitstellung auszulösen
+  pull_request:
 
 jobs:
   lint:
@@ -17,12 +13,12 @@ jobs:
       - name: Checkout des Repositories
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '20'  # Node.js Version anpassen
 
-      - name: Installieren der Abhängigkeiten
+      - name: Installiere Abhängigkeiten
         run: npm install
 
       - name: Ausführen von ESLint
@@ -44,7 +40,7 @@ jobs:
       - name: Checkout des Repositories
         uses: actions/checkout@v4
 
-      - name: Installieren der Abhängigkeiten
+      - name: Installiere Abhängigkeiten
         run: npm install
 
       - name: Build der Webseite mit Astro
@@ -55,34 +51,39 @@ jobs:
           echo "Inhalt des Build-Verzeichnisses:"
           ls -la dist || echo "Verzeichnis nicht gefunden" # Überprüfen, ob das Verzeichnis existiert
 
-      - name: Upload des Build-Artefakts
-        uses: actions/upload-artifact@v2
-        with:
-          name: github-pages
-          path: dist
-
   deploy:
     needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - name: Checkout des Repositories
         uses: actions/checkout@v4
-
-      - name: Herunterladen des Build-Artefakts
-        uses: actions/download-artifact@v2
         with:
-          name: github-pages
-          path: ./dist
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
 
-      - name: Auflisten der heruntergeladenen Dateien
-        run: ls -l dist
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'  # Node.js Version anpassen
 
-      - name: Deployment auf GitHub Pages
-        id: deployment
+      - name: Installiere Abhängigkeiten
+        run: npm install
+
+      - name: Build der Webseite mit Astro
+        run: |
+          echo "Webseite wird mit Astro gebaut..."
+          npx astro build
+          touch dist/.nojekyll  # Fügt die .nojekyll Datei hinzu
+          echo "Inhalt des Build-Verzeichnisses:"
+          ls -la dist || echo "Verzeichnis nicht gefunden" # Überprüfen, ob das Verzeichnis existiert
+
+      - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
+        if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist  # Das Verzeichnis, das veröffentlicht werden soll
