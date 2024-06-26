@@ -3,98 +3,54 @@ name: GitHub Pages Astro CI
 on:
   push:
     branches:
-      - main  # Setze den Branch-Namen, um die Bereitstellung auszulösen
+      - main  # Trigger deployment on main branch
   pull_request:
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout des Repositories
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20'  # Node.js Version anpassen
-
-      - name: Installiere Abhängigkeiten
-        run: npm install
-
-      - name: Ausführen von ESLint
-        run: npx eslint .
-
-      - name: Ausführen von Stylelint
-        run: npx stylelint "src/**/*.astro"
-
-      - name: Ausführen von HTMLHint
-        run: npx htmlhint "**/*.html"
-
-      - name: Ausführen von Astro Lint
-        run: npx astro lint
-
-  build:
-    needs: lint
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout des Repositories
-        uses: actions/checkout@v4
-
-      - name: Installiere Abhängigkeiten
-        run: npm install
-
-      - name: Build der Webseite mit Astro
-        run: |
-          echo "Webseite wird mit Astro gebaut..."
-          npx astro build
-          touch dist/.nojekyll  # Fügt die .nojekyll Datei hinzu
-          echo "Inhalt des Build-Verzeichnisses:"
-          ls -la dist || echo "Verzeichnis nicht gefunden" # Überprüfen, ob das Verzeichnis existiert
-
-          
-  test:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout your repository using git
-        uses: actions/checkout@v4
-      - name: Install dependencies
-        run: npm install
-        env:
-          CI: true  # Set CI environment variable for npm test to run tests in non-interactive mode
   deploy:
-    needs: build
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     permissions:
       contents: write
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
-      - name: Checkout des Repositories
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          submodules: true  # Fetch Hugo themes (true OR recursive)
-          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+          submodules: true  # Fetch submodules if any
+          fetch-depth: 0    # Fetch all history
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20'  # Node.js Version anpassen
+          node-version: '20'  # Set Node.js version to 20
 
-      - name: Installiere Abhängigkeiten
+      - name: Install dependencies
         run: npm install
 
-      - name: Build der Webseite mit Astro
+      - name: Run ESLint
+        run: npx eslint .
+
+      - name: Run Stylelint
+        run: npx stylelint "src/**/*.astro"
+
+      - name: Run HTMLHint
+        run: npx htmlhint "**/*.html"
+
+      - name: Run Astro Lint
+        run: npx astro lint
+
+      - name: Build and Test
         run: |
-          echo "Webseite wird mit Astro gebaut..."
+          npm run lint
+          npm run build
+          npm run test
+          echo "Deploying..."
           npx astro build
-          touch dist/.nojekyll  # Fügt die .nojekyll Datei hinzu
-          echo "Inhalt des Build-Verzeichnisses:"
-          ls -la dist || echo "Verzeichnis nicht gefunden" # Überprüfen, ob das Verzeichnis existiert
-     
-      - name: Deploy
+          touch dist/.nojekyll
+          ls -la dist || echo "Directory not found"
+
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist  # Das Verzeichnis, das veröffentlicht werden soll
+          publish_dir: ./dist  # Directory to deploy
