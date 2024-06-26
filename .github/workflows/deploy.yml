@@ -21,10 +21,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20'  # Set Node.js version to 20
+          node-version: 'lts/*'  # Set Node.js version to lts/*
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install dependencies and Playwright browsers
+        run: |
+          npm install
+          npx playwright install --with-deps
 
       - name: Run ESLint
         run: npx eslint .
@@ -40,7 +42,6 @@ jobs:
 
       - name: Build and Test
         run: |
-          npm run lint
           npm run build
           npm run test
           echo "Deploying..."
@@ -54,3 +55,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist  # Directory to deploy
+
+      - name: Run Playwright tests
+        run: npx playwright test
