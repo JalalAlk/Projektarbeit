@@ -26,13 +26,14 @@ const { movie } = Astro.props as { movie: Movie };
     .card {
         background: #d6a70c;
         border-radius: 20px;
-        box-shadow: inset 0 0 0 3px rgb(226, 161, 21);
+        box-shadow: inset 0 0 0 3px rgb(226 161 21);
         overflow: hidden;
         margin-bottom: 3rem;
         color: white;
         perspective: 10000px; /* For 3D effect */
         cursor: pointer;
     }
+
     .card-inner {
         position: relative;
         width: 100%;
@@ -40,9 +41,11 @@ const { movie } = Astro.props as { movie: Movie };
         transition: transform 0.6s;
         transform-style: preserve-3d;
     }
+
     .card.flipped .card-inner {
         transform: rotateY(180deg);
     }
+
     .card-front, .card-back {
         position: absolute;
         width: 100%;
@@ -54,14 +57,17 @@ const { movie } = Astro.props as { movie: Movie };
         align-items: center;
         text-align: center;
     }
+
     .card-front {
         background: #d6a70c;
     }
+
     .card-front img {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
+
     .card-back {
         background: #1e1e1e;
         color: white;
@@ -72,6 +78,7 @@ const { movie } = Astro.props as { movie: Movie };
         align-items: center;
         flex-direction: column;
     }
+
     .card-back-content {
         padding: 2rem; /* Increase padding for more space around the content */
         display: flex;
@@ -80,12 +87,14 @@ const { movie } = Astro.props as { movie: Movie };
         align-items: center;
         text-align: center;
     }
+
     .card-title {
         margin: 0;
         font-size: 1rem; /* Adjust font size */
         margin-bottom: 3rem; /* Adjust margin */
         color: #d6a70c; /* Adjust text color */
     }
+
     .card-description {
         margin: 0;
         font-size: 1.2rem; /* Adjust font size */
