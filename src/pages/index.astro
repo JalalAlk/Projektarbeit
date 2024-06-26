@@ -6,12 +6,17 @@ const movies = [
     { title: "OPPENHEIMER", description: "Während des Zweiten Weltkriegs beauftragt Generalleutnant Leslie Groves Jr. den Physiker J. Robert Oppenheimer mit der federführenden Mitarbeit am streng geheimen Manhattan-Projekt: Oppenheimer und ein Team von Wissenschaftlern arbeiten jahrelang an der Entwicklung und Konstruktion der Atombombe", image: "https://musicart.xboxlive.com/7/65526800-0000-0000-0000-000000000002/504/image.jpg?w=1920&h=1080" },
     { title: "Killers of the Flower Moon", description: "In den 1920er-Jahren werden Mitglieder des indianischen Stammes der Osage im Bundesstaat Oklahoma ermordet, nachdem auf ihrem Land Öl gefunden worden ist. Das löst eine groß angelegte Untersuchung einer völlig neuen Polizeieinheit, dem FBI, aus", image: "https://images.static-bluray.com/products/20/76612_2_large.jpg" },
     { title: "Titanic", description: "England, 1912: An Bord der Titanic, des größten Passagierschiffs der Welt, begegnen sich Rose, ein Mädchen der gehobenen Gesellschaft, und der mittellose Maler Jack. Als Jack beobachtet, wie Rose über die Reling klettert, um sich ins Meer zu stürzen, und ihren sicheren Tod abwenden kann", image: "https://m.media-amazon.com/images/I/71ps2xBoAuL._AC_UF894,1000_QL80_.jpg" },
-	{ title: "DUNE", description: "Im Jahre 10191 entbrennt ein gigantischer Machtkampf um die Vorherrschaft über das Galaktische Imperium der Menschheit: Aus diesem Grunde schickt der kosmische Imperator Shaddam IV.", image: "https://www.koeln.de/kino/media/images/p_297145_Plakat1920.jpg" },
-	
-	// Add more movie objects here
+    { title: "DUNE", description: "Im Jahre 10191 entbrennt ein gigantischer Machtkampf um die Vorherrschaft über das Galaktische Imperium der Menschheit: Aus diesem Grunde schickt der kosmische Imperator Shaddam IV.", image: "https://www.koeln.de/kino/media/images/p_297145_Plakat1920.jpg" },
+    { title: "The Godfather", description: "Don Vito Corleone ist ein Mafioso der alten Schule. Sein Unterweltimperium regiert er mit harter Hand. Als ein Mitglied der rivalisierenden Familie Tattaglia ihn auffordert, in den Drogenhandel einzusteigen, lehnt der Pate ab. Eine verhängnisvolle Entscheidung.", image: "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg" },
+    { title: "The Dark Knight", description: "Gotham City hat viele finstere Gestalten hervorgebracht, doch der Joker ist anders. Mit brillantem Verstand und grotesk geschminktem Gesicht versucht er, Batmans Revier ins Chaos zu stürzen", image: "https://m.media-amazon.com/images/S/pv-target-images/e9a43e647b2ca70e75a3c0af046c4dfdcd712380889779cbdc2c57d94ab63902.jpg" },
+    { title: "forrest gump", description: "Der gutmütige, leicht gehbehinderte und mit einem IQ von nur 75 ausgestattete Forrest Gump schlägt sich auf bemerkenswerte Weise durch 40 Jahre amerikanische Geschichte. Er macht Karriere als Football-Spieler, Langstreckenläufer, dekorierter Vietnam-Held und Tischtennis-Profi", image: "https://de.web.img3.acsta.net/pictures/bzp/01/10568.jpg" },
+    { title: "Fight Club", description: "Als ein unter Schlaflosigkeit leidender Unternehmer dem dubiosen Tyler Durden begegnet, gründen die beiden eine kathartische Untergrundvereinigung der Gewalt.", image: "https://i.etsystatic.com/18242346/r/il/c9908e/2412674268/il_fullxfull.2412674268_1sgm.jpg" },
+    { title: "Inception", description: "Dank modernster Technologie ist es in naher Zukunft möglich, in Träume und somit in das Unterbewusstsein von Menschen einzusteigen. Das Einsteigen bedeutet mithin auch die Möglichkeit des Diebstahls fremder und bisher ureigenster Ideen.", image: "https://m.media-amazon.com/images/I/912AErFSBHL._AC_UF894,1000_QL80_.jpg" },
+    { title: "Interstellar", description: "Die Menschheit steht bereits kurz vor ihrer Auslöschung durch Klimawandel und Nahrungsmangel, als ein mysteriöser Riss im Raum-Zeit-Gewebe entdeckt wird, der eine Chance zum Überleben verheißt. Der ehemalige NASA-Pilot Cooper wird mit einem Forscherteam auf eine Mission durch das Wurmloch in ein anderes Sonnensystem geschickt, um nach neuen Lebensräumen zu suchen", image: "https://m.media-amazon.com/images/I/91JnoM0khKL._AC_UF894,1000_QL80_.jpg" },
+    // Add more movie objects here
 ];
 ---
-<MainLayout title="Top 10 Movies in 2024">
+<MainLayout title="Top 10 Movies Of All Time">
     <div class="movie-grid">
         {movies.map(movie => (
             <Card movie={movie} />
@@ -21,9 +26,9 @@ const movies = [
 
 <style>
     .movie-grid {
-    	display: grid;
-    	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    	gap: 2rem;
-    	padding: 2rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 2rem;
     }
 </style>

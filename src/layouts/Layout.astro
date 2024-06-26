@@ -1,4 +1,7 @@
 ---
+interface Props {
+    title: string;
+}
 const { title } = Astro.props;
 ---
 <!DOCTYPE html>
@@ -15,9 +18,9 @@ const { title } = Astro.props;
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="/actors">Actors</a></li>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/settings">Settings</a></li>
+                <li><a href="/Actors">Actors</a></li>
+                <li><a href="/Aboutus">About Us</a></li>
+                <li><a href="/Settings">Settings</a></li>
             </ul>
         </nav>
     </header>
@@ -38,9 +41,9 @@ const { title } = Astro.props;
         color: rgb(226, 161, 21);
         padding: 2rem;
         text-align: center;
-		background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Very_Black_screen.jpg/2560px-Very_Black_screen.jpg') no-repeat center center/cover;
+        background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Very_Black_screen.jpg/2560px-Very_Black_screen.jpg') no-repeat center center/cover;
     }
-	header::before {
+    header::before {
         content: '';
         position: absolute;
         top: 0;
@@ -51,7 +54,7 @@ const { title } = Astro.props;
         filter: blur(13px); /* Adjust the blur amount as needed */
         z-index: -1;
     }
-	h1 {
+    h1 {
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Adds shadow to the text */
     }
     nav ul {
@@ -65,7 +68,7 @@ const { title } = Astro.props;
         color: white;
         text-decoration: none;
         font-weight: bold;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
         transition: box-shadow 0.3s ease;
     }
     main {
