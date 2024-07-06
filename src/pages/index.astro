@@ -44,6 +44,27 @@ const remainingMovies = movies.slice(4);
 ---
 
 <MainLayout title="Movies.Horan">
+    <section class="container"
+        <div class="slider-wrapper" >
+            <div class="slider">
+                <img id="slide-1" src="https://cdn.discordapp.com/attachments/1229507953728684174/1259283815910871070/Movie1.jpg?ex=668b1ef2&is=6689cd72&hm=b9bcb31a09f0583e58602c512277a9f47bb5b82e2ccd4b145447cf42bd9c1ab2&" alt="movie foto" />
+                <img id="slide-2" src="https://cdn.discordapp.com/attachments/1229507953728684174/1259283838463381564/Movie2.jpg?ex=668b1ef7&is=6689cd77&hm=177cd0d6f831a690b88a8080b764e703b0b199780c7305a3503b9d300a2a10b7&" alt="movie foto" />
+                <img id="slide-3" src="https://cdn.discordapp.com/attachments/1229507953728684174/1259283838719492208/Movie3.jpg?ex=668b1ef7&is=6689cd77&hm=3789c21e96270efd2389fa4dbdb4b6a6c0f23289f51b96cdd6450c13b8b4a06c&" alt="movie foto" />
+                <img id="slide-4" src="https://cdn.discordapp.com/attachments/1229507953728684174/1259283839017160815/Movie4.jpg?ex=668b1ef7&is=6689cd77&hm=a54024599ff262a797bde1ddae9f52535bb7e4fb0240add41dbeeccbc822d903&" alt="movie foto" />
+                <img id="slide-5" src="https://cdn.discordapp.com/attachments/1229507953728684174/1259283838153134254/Movie5.jpg?ex=668b1ef7&is=6689cd77&hm=1d22c9e75f1b5ab5ccd595f260c71fe9f0f184fbd6c0f0a2088298318b222ff9&" alt="movie foto" />
+                <img id="slide-6" src="https://cdn.discordapp.com/attachments/1229507953728684174/1259284356669767730/movie6.jpg?ex=668b1f73&is=6689cdf3&hm=87c95a3ca1bfb6ea7e21c6f01b9b5f11d617ecd8243752c81958cf84c7449b68&" alt="movie foto" />
+            </div>
+          <div class="slider-nav">
+            <a href="#slide-1"></a>
+            <a href="#slide-2"></a>
+            <a href="#slide-3"></a>
+            <a href="#slide-4"></a>
+            <a href="#slide-5"></a>
+            <a href="#slide-1"></a>
+          </div>
+        </div>
+    </section>
+    
     <div class="golden-box">
         <div class="movie-section">
             <h1 style="text-align: center; color: gold; font-size: 3rem; font-family: Georgia, serif;">
@@ -94,7 +115,7 @@ const remainingMovies = movies.slice(4);
         </h1>
 
         
-            
+
         <div class="movie-grid">
             {topMovies.map((movie, index) => (
                 <div class={`movie-box ${getBoxColor(index)}`}>
@@ -144,6 +165,78 @@ const remainingMovies = movies.slice(4);
 
 <style>
 
+
+.container {
+    height: 300px; /* Adjust height as needed */
+    padding: -4rem;
+    margin-bottom: 30px;
+    overflow: hidden; /* Ensure the container clips overflow */
+    border-radius: 2rem;
+}
+
+.slider-wrapper {
+    position: relative;
+    max-width: 48rem;
+    margin: 0 auto;
+}
+
+.slider {
+    display: flex;
+    overflow: hidden;
+    box-shadow: 0 1.5rem 3rem -0.75rem hsl(0deg 0% 0% / 25%);
+    border-radius: 2rem;
+}
+
+.slider img {
+    width: 100%; 
+    height: 300px; 
+    flex: 0 0 auto; 
+    object-fit: cover;
+    transition: transform 1s ease; 
+    animation: slide 20s infinite; 
+
+}
+
+.slider-nav a {
+    width: 12px; 
+    height: 12px; 
+    border-radius: 50%;
+    background-color: #f7c522;
+    opacity: 0.75;
+    transition: opacity ease 250ms;
+    margin: 0 0.5rem; 
+}
+
+.slider-nav a.active {
+    opacity: 1;
+}
+
+@keyframes slide {
+    0%, 10%{
+        transform: translateX(0);
+    }
+
+    15%, 25%{
+        transform: translateX(-100%);
+    }
+
+    30%, 40%{
+        transform: translateX(-200%);
+    }
+
+    45%, 55%{
+        transform: translateX(-300%);
+    }
+
+    60%, 75%{
+        transform: translateX(-400%);
+    }
+
+    80%, 95%{
+        transform: translateX(-500%);
+    }
+}
+
 .small-pictures {
     margin-top: 1px;
     text-align: center;
@@ -170,42 +263,43 @@ const remainingMovies = movies.slice(4);
     transform: scale(1.2); /* Zoom-in effect */
 }
 
+
 .golden-box {
-    position: relative; /* Make the container a reference point for the pseudo-elements */
-    display: flex; /* Use flexbox for easier alignment */
+    position: relative; 
+    display: flex; 
     align-items: center;
-    justify-content: center; /* Center content horizontally */
-    border: 4px solid #927d02;
+    justify-content: center; 
+    border: 0 solid #927d02;
     padding: 1px;
     border-radius: 20px;
-    overflow: hidden; /* Prevent the pseudo-elements from overflowing the box */
+    overflow: hidden;
 }
+
 
 .golden-box::before {
-    content: ''; /* Create the pseudo-element */
-    position: absolute; /* Position it absolutely within the golden box */
+    content: ''; 
+    position: absolute; 
     inset: 0;
-    background-image: url('https://st3.depositphotos.com/14209610/35804/i/450/depositphotos_358048480-stock-photo-royal-golden-black-backgrounds.jpg'); /* Set the background image */
-    background-size: cover; /* Ensure the image covers the entire box */
-    background-position: center; /* Center the background image */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
-    filter: blur(10px); /* Apply the blur filter */
-    z-index: -2; /* Place the background behind the overlay */
-    border-radius: 20px; /* Match the border radius of the golden box */
+    background: url('https://cdn.discordapp.com/attachments/1229507953728684174/1259284356049145929/edg.png?ex=668b1f72&is=6689cdf2&hm=e847005728ff3f981cedf7052bc15a96e6b8e3d2db57ed93751b28dcf282fae6&');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    z-index: -2; 
+    border-radius: 20px;
 }
+
 
 .golden-box::after {
-    content: ''; /* Create the pseudo-element */
-    position: absolute; /* Position it absolutely within the golden box */
+    content: ''; 
+    position: absolute;
     inset: 0;
-    background-color: rgb(0 0 0 / 80%); /* Set a semi-transparent black background */
-    z-index: -1; /* Place the overlay behind the content but above the background */
-    border-radius: 20px; /* Match the border radius of the golden box */
-}
+    z-index: -1; 
+    border-radius: 20px; 
+} 
 
 .movie-section {
-    position: relative; /* Ensure the content is positioned relative to the box */
-    z-index: 1; /* Make sure the content is above the pseudo-elements */
+    position: relative; 
+    z-index: 1; 
     margin-bottom: 10rem;
 
 }
