@@ -21,9 +21,8 @@ const movies = [
     { title: "The Lord of the Rings: The Fellowship of the Ring", description: "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.", image: "https://m.media-amazon.com/images/M/MV5BN2EyZjM3NzUtNWUzMi00MTgxLWI0NTctMzY4M2VlOTdjZWRiXkEyXkFqcGdeQXVyNDUzOTQ5MjY@._V1_FMjpg_UX1000_.jpg", trailer: "https://www.youtube.com/watch?v=V75dMMIW2B4", imdb: "https://www.imdb.com/title/tt0120737/", rating: "8.8", play: "https://fmovies24.to/movie/the-lord-of-the-rings-the-fellowship-of-the-ring-extended-80ln" , year:""},
     { title: "The Usual Suspects", description: "A sole survivor tells of the twisty events leading up to a horrific gun battle on a boat, which began when five criminals met at a seemingly random police lineup.", image: "https://m.media-amazon.com/images/M/MV5BYTViNjMyNmUtNDFkNC00ZDRlLThmMDUtZDU2YWE4NGI2ZjVmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg", trailer: "https://www.youtube.com/watch?v=oiXdPolca5w", imdb: "https://www.imdb.com/title/tt0114814/", rating: "8.5", play: "https://fmovies24.to/movie/the-usual-suspects-oj5y" , year:"" },
     { title: "The Green Mile", description: "The lives of guards on Death Row are affected by one of their charges: a black man accused of child murder and rape, yet who has a mysterious gift.", image: "https://m.media-amazon.com/images/M/MV5BMTUxMzQyNjA5MF5BMl5BanBnXkFtZTYwOTU2NTY3._V1_FMjpg_UX1000_.jpg", trailer: "https://www.youtube.com/watch?v=Ki4haFrqSrw", imdb: "https://www.imdb.com/title/tt0120689/", rating: "8.6", play: "https://fmovies24.to/movie/the-green-mile-ll56" , year:"" },
-    { title: "The Pianist", description: "A Polish Jewish musician struggles to survive the destruction of the Warsaw ghetto of World War II.", image: "https://m.media-amazon.com/images/M/MV5BOWRiZDIxZjktMTA1NC00MDQ2LWEzMjUtMTliZmY3NjQ3ODJiXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg", trailer: "https://www.youtube.com/watch?v=u_jE7-6Uv7E", imdb: "https://www.imdb.com/title/tt0253474/", rating: "8.5", play:"https://fmovies24.to/movie/the-pianist-m257" , year:"" },
+    { title: "The Pianist", description: "A Polish Jewish musician struggles to survive the destruction of the Warsaw ghetto of World War II.", image: "https://m.media-amazon.com/images/M/MV5BOWRiZDIxZjktMTA1NC00MDQ2LWEzMjUtMTliZmY3NjQ3ODJiXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg", trailer: "https://www.youtube.com/watch?v=u_jE7-6Uv7E", imdb: "https://www.imdb.com/title/tt0253474/", rating: "8.5" , play:"https://fmovies24.to/movie/the-pianist-m257" , year:"" },
 ];
-
 
 const getBoxColor = (index) => {
     switch (index) {
@@ -48,7 +47,7 @@ const remainingMovies = movies.slice(4);
     <div class="slider-wrapper active">
         <div class="slider">
             <video id="slide-1" autoplay muted loop playsinline class="unclickable">
-                <source src="https://cdn.discordapp.com/attachments/1229507953728684174/1259312349467119636/video2.mp4?ex=668b3985&is=6689e805&hm=d21c9dd0ab62cd178faa3b7bd3f12faaacafc023c95166ec69077bc1704d7b6c&" type="video/mp4">
+                <source src="https://cdn.discordapp.com/attachments/1229507953728684174/1259312349467119636/video2.mp4?ex=668f2e05&is=668ddc85&hm=8387007df12c5fddd9f62814ae1c7b1f3595bdf5fe370ccc0ee8bec793f54230&" type="video/mp4">
             </video>
             <img id="slide-2" src="https://cdn.discordapp.com/attachments/1229507953728684174/1259283838463381564/Movie2.jpg?ex=668b1ef7&is=6689cd77&hm=177cd0d6f831a690b88a8080b764e703b0b199780c7305a3503b9d300a2a10b7&" alt="movie photo" />
             <img id="slide-3" src="https://cdn.discordapp.com/attachments/1229507953728684174/1259283838719492208/Movie3.jpg?ex=668b1ef7&is=6689cd77&hm=3789c21e96270efd2389fa4dbdb4b6a6c0f23289f51b96cdd6450c13b8b4a06c&" alt="movie photo" />
@@ -83,7 +82,7 @@ const remainingMovies = movies.slice(4);
                     <div class="buttons">
                         <a href={movies.find(movie => movie.title === "The Godfather").trailer} class="button" target="_blank">Watch Trailer</a>
                         <a href={movies.find(movie => movie.title === "The Godfather").imdb} class="button" target="_blank">IMDb</a>
-                        <a href={movies.find(movie => movie.title === "The Godfather").play} class="button" target="_blank">Watch Movie</a>
+                        <a href={movies.find(movie => movie.title === "The Godfather").play} class="button" target="_blank">Watch Movie </a>
                     </div>
                 </div>
                 <div class="small-pictures">
@@ -99,10 +98,11 @@ const remainingMovies = movies.slice(4);
         <h1 style="text-align: center; color: white; font-size: 3rem;">
             <span style="display: inline-flex; align-items: center;">
                 <img src="https://uxwing.com/wp-content/themes/uxwing/download/video-photography-multimedia/movie-icon.png" alt="Trophy Icon" style="height: 1.5em; width: auto; margin-right: 30px;">
-                Top 3 Movies
+                    Top 3 Movies
                 <img src="https://uxwing.com/wp-content/themes/uxwing/download/video-photography-multimedia/movie-icon.png" alt="Movie Icon" style={{ height: "1.5em", width: "auto", marginLeft: "30px", transform: "scaleX(-1)" }} />
             </span>
-            <br> <!-- Add line break here to separate the top movies header and the dropdown -->
+            <br> 
+
             <div class="year-container">
                 <label for="yearDropdown" style="color: white; font-size: 2rem; font-weight: bold;">Select Year:</label>
                 <select id="yearDropdown" onchange="handleYearChange(this.value)" class="year-dropdown">
@@ -115,8 +115,6 @@ const remainingMovies = movies.slice(4);
             </div>
             
         </h1>
-
-        
 
         <div class="movie-grid">
             {topMovies.map((movie, index) => (
@@ -139,7 +137,6 @@ const remainingMovies = movies.slice(4);
         </div>
     </div>
 
-
     <div class="movie-section">
         <h1 style="text-align: center; font-size: 3rem; color:white">People Also Like</h1>    
         <div class="people-liked">
@@ -153,7 +150,7 @@ const remainingMovies = movies.slice(4);
                             <a href={movie.trailer} class="button" target="_blank">Watch Trailer</a>
                             <a href={movie.imdb} class="button" target="_blank">IMDb</a>
                             <a href={movie.play} class="button" target="_blank">Watch Movie</a>
-                            <span style="color : white" class="rating">{movie.rating}</span>
+                            <span style="color : white" class="rating">{movie.rating} </span>
                         </div>
                     </div>
                 </div>
@@ -166,20 +163,23 @@ const remainingMovies = movies.slice(4);
 </MainLayout>
 
 <style>
+/* Container settings */
 .container {
-    height: 300px; /* Adjust height as needed */
-    padding: -4rem;
+    height: 300px; /* Fixed height for the container */
+    padding: 0; /* Negative padding doesn't work as intended */
     margin-bottom: 30px;
-    overflow: hidden; /* Ensure the container clips overflow */
     border-radius: 2rem;
 }
 
+/* Wrapper settings */
 .slider-wrapper {
     position: relative;
-    max-width: 48rem;
-    margin: 0 auto;
+    max-width: 48rem; /* Maximum width of 48rem */
+    width: 100%; /* 100% width for responsive design */
+    margin: 0 auto; /* Center the wrapper */
 }
 
+/* Slider settings */
 .slider {
     display: flex;
     overflow: hidden;
@@ -187,42 +187,65 @@ const remainingMovies = movies.slice(4);
     border-radius: 2rem;
 }
 
+/* Media settings */
 .slider img, .slider video {
     width: 100%; 
     height: 300px; 
     flex: 0 0 auto; 
     object-fit: cover;
     transition: transform 1s ease;
-    animation: slide 20s infinite; 
+    animation: slide 30s infinite; 
 }
 
+/* Animation settings */
 @keyframes slide {
-    0%, 15% {
+    0%, 12% {
         transform: translateX(0);
     }
 
-    17%, 25% {
+    14%, 26% {
         transform: translateX(-100%);
     }
 
-    30%, 40% {
+    28%, 40% {
         transform: translateX(-200%);
     }
 
-    45%, 55% {
+    42%, 54% {
         transform: translateX(-300%);
     }
 
-    60%, 75% {
+    56%, 68% {
         transform: translateX(-400%);
     }
 
-    80%, 96% {
+    70%, 82% {
         transform: translateX(-500%);
     }
 
-    98%, 100% {
+    84%, 96% {
         transform: translateX(0);
+    }
+}
+
+/* Responsive settings */
+@media (width <= 768px) {
+    .container {
+        height: 200px; /* Adjust height for smaller screens */
+    }
+
+    .slider img, .slider video {
+        height: 200px; /* Adjust height for smaller screens */
+    }
+}
+
+@media (width <= 480px) {
+    .container {
+        height: 150px; /* Adjust height for smaller screens */
+    }
+
+    .slider img, .slider video {
+        height: 150px; /* Adjust height for smaller screens */
     }
 }
 
@@ -252,18 +275,15 @@ const remainingMovies = movies.slice(4);
     transform: scale(1.2); /* Zoom-in effect */
 }
 
-
 .golden-box {
     position: relative; 
     display: flex; 
     align-items: center;
     justify-content: center; 
-    border: 0 solid #927d02;
     padding: 1px;
     border-radius: 20px;
     overflow: hidden;
 }
-
 
 .golden-box::before {
     content: ''; 
@@ -277,7 +297,6 @@ const remainingMovies = movies.slice(4);
     border-radius: 20px;
 }
 
-
 .golden-box::after {
     content: ''; 
     position: absolute;
@@ -290,7 +309,6 @@ const remainingMovies = movies.slice(4);
     position: relative; 
     z-index: 1; 
     margin-bottom: 10rem;
-
 }
 
 .year-container {
