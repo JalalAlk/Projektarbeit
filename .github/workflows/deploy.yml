@@ -40,21 +40,26 @@ jobs:
       - name: Run Astro Lint
         run: npx astro lint
 
-      - name: Build and Test
+      - name: Build project
+        run: npm run build
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Prepare deployment
         run: |
-          npm run build
-          npm run test
-          echo "Deploying..."
           npx astro build
           touch dist/.nojekyll
           ls -la dist || echo "Directory not found"
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
-        if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist  # Directory to deploy
+          publish_branch: gh-pages  # Specify the branch to publish to
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
 
       - name: Run Playwright tests
         run: npx playwright test
