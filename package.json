@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "clean": "rimraf ./dist",
+    "clean": "rimraf ./dist && rimraf ./playwright-report",
     "lint": "eslint . && stylelint 'src/**/*.{astro,css}'",
     "lint:fix": "eslint . --fix && stylelint 'src/**/*.{astro,css}' --fix",
     "prebuild": "npm run clean && npm run lint",
@@ -19,13 +19,12 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "open": "^10.1.0",
-    "playwright": "^1.45.1"
+    "open": "^10.1.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.44.1",
     "@types/node": "^20.14.2",
-    "astro": "^4.11.5",
+    "astro": "^4.11.0",
     "astro-eslint-parser": "^1.0.2",
     "concurrently": "^8.0.1",
     "eslint": "^9.4.0",
