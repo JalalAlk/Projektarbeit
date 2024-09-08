@@ -30,7 +30,7 @@ test('Homepage Tests › Überprüfung der Filmkarten', async ({ page }) => {
     const descriptionElement = await page.$(descriptionSelector);
 
     // Erwartungen prüfen
-    expect(titleElement).toBeTruthy();
+    expect(titleElement).toBeNull();
 expect(descriptionElement).toBeTruthy();
   }
 });

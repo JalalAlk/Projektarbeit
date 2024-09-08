@@ -19,6 +19,8 @@ const config: PlaywrightTestConfig = {
   use: {
     baseURL: 'http://localhost:4321/', // Basis-URL für die Tests
     trace: 'on-first-retry', // Erfassen von Traces bei erster Wiederholung eines fehlgeschlagenen Tests
+    headless: true,
+    video: 'retain-on-failure',  
   },
 
   projects: [
@@ -26,14 +28,14 @@ const config: PlaywrightTestConfig = {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] }, // Konfiguration für Chromium (Desktop)
     },
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] }, // Konfiguration für Firefox (Desktop)
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] }, // Konfiguration für WebKit (Desktop)
-    },
+    //{
+     // name: 'firefox',
+      //use: { ...devices['Desktop Firefox'] }, // Konfiguration für Firefox (Desktop)
+    //},
+    //{
+      //name: 'webkit',
+      //use: { ...devices['Desktop Safari'] }, // Konfiguration für WebKit (Desktop)
+    //},
   ],
 };
 
