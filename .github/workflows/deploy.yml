@@ -21,7 +21,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 'lts/*'  # Set Node.js version to lts/*
+          node-version: 'lts/*'  # Set Node.js version to lts/*.
 
       - name: Install dependencies and Playwright browsers
         run: |
