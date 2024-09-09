@@ -55,8 +55,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist  # Directory to deploy
           publish_branch: gh-pages  # Specify the branch to publish to
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
+        
 
       - name: Run Playwright tests
         run: npx playwright test
