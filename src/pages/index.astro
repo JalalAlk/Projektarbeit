@@ -1,94 +1,488 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome to My Astro Page</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header>
-    <h1>Welcome to My Astro Page</h1>
-  </header>
+---
+import MainLayout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+const movies = [
 
-  <main>
-    <div class="card">
-      <h2>Card 1</h2>
-      <p>This is the description for card 1.</p>
+    { title: "The Godfather", description: "In den 1940er-Jahren in New York City: Don Vito Corleone, der Patriarch der mächtigen Corleone-Mafiafamilie, zieht sich langsam aus dem Tagesgeschäft zurück. Während er den Weg für seinen jüngeren Sohn Michael frei macht, bricht ein Drogenkrieg in der Unterwelt aus.", image: "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg", trailer: "https://www.youtube.com/watch?v=sY1S34973zA", imdb: "https://www.imdb.com/title/tt0068646/", rating: "9.2", play: "https://fmovies24.to/movie/the-godfather-q9o3" ,year:"" , special: true },
+    { title: "OPPENHEIMER", description: "Während des Zweiten Weltkriegs beauftragt Generalleutnant Leslie Groves Jr. den Physiker J. Robert Oppenheimer mit der federführenden Mitarbeit am streng geheimen Manhattan-Projekt: Oppenheimer und ein Team von Wissenschaftlern arbeiten jahrelang an der Entwicklung und Konstruktion der Atombombe.", image: "https://musicart.xboxlive.com/7/65526800-0000-0000-0000-000000000002/504/image.jpg?w=1920&h=1080", trailer: "https://www.youtube.com/watch?v=bK6ldnjE3Y0", imdb: "https://www.imdb.com/title/tt15398776/", rating: "8.7", play: "https://fmovies24.to/movie/oppenheimer-j2r74" , year:"2024"},
+    { title: "DUNE", description: "Im Jahre 10191 entbrennt ein gigantischer Machtkampf um die Vorherrschaft über das Galaktische Imperium der Menschheit: Aus diesem Grunde schickt der kosmische Imperator Shaddam IV.", image: "https://www.koeln.de/kino/media/images/p_297145_Plakat1920.jpg", trailer: "https://www.youtube.com/watch?v=n9xhJrPXop4", imdb: "https://www.imdb.com/title/tt1160419/", rating: "8.1", play: "https://fmovies24.to/movie/dune-part-two-91jy0" , year:"2024"},
+    { title: "KILLERS OF THE FLOWER MOON", description: "In den 1920er-Jahren werden Mitglieder des indianischen Stammes der Osage im Bundesstaat Oklahoma ermordet, nachdem auf ihrem Land Öl gefunden worden ist. Das löst eine groß angelegte Untersuchung einer völlig neuen Polizeieinheit, dem FBI, aus.", image: "https://images.static-bluray.com/products/20/76612_2_large.jpg", trailer: "https://www.youtube.com/watch?v=Ee6m8HoJdnM", imdb: "https://www.imdb.com/title/tt5537002/", rating: "7.8", play: "https://fmovies24.to/movie/killers-of-the-flower-moon-00pz7", year:"2024" },
+    { title: "Titanic", description: "England, 1912: An Bord der Titanic, des größten Passagierschiffs der Welt, begegnen sich Rose, ein Mädchen der gehobenen Gesellschaft, und der mittellose Maler Jack. Als Jack beobachtet, wie Rose über die Reling klettert, um sich ins Meer zu stürzen, und ihren sicheren Tod abwenden kann.", image: "https://m.media-amazon.com/images/I/71ps2xBoAuL._AC_UF894,1000_QL80_.jpg", trailer: "https://www.youtube.com/watch?v=2e-eXJ6HgkQ", imdb: "https://www.imdb.com/title/tt0120338/", rating: "7.8", play: "https://fmovies24.to/movie/titanic-xx5q", year:"2023" },
+    { title: "Inglourious Basterds", description: "Während des Zweiten Weltkriegs in Frankreich: Oberstleutnant Hans Landa verhört die Familie eines französischen Bauern, um Widerständler ausfindig zu machen. Einige Jahre später begibt sich der jüdische Soldat Aldo Raine mit seiner jüdisch-amerikanischen Kompanie auf eine Vergeltungsmission gegen die Nazis.", image: "https://m.media-amazon.com/images/I/71t14nj8cKL._AC_UF894,1000_QL80_.jpg", trailer: "https://www.youtube.com/watch?v=KnrRy6kSFF0", imdb: "https://www.imdb.com/title/tt0361748/", rating: "8.3", play: "https://fmovies24.to/movie/inglourious-basterds-7j5y" , year:"2023"},
+    { title: "The Dark Knight", description: "Gotham City ist eine Stadt voller Verbrechen und Korruption. Der Joker, ein psychopathischer Verbrecher, sät Chaos und Unruhe in der Stadt, während Batman versucht, ihn aufzuhalten.", image: "https://m.media-amazon.com/images/S/pv-target-images/e9a43e647b2ca70e75a3c0af046c4dfdcd712380889779cbdc2c57d94ab63902.jpg", trailer: "https://www.youtube.com/watch?v=EXeTwQWrcwY", imdb: "https://www.imdb.com/title/tt0468569/", rating: "9.0", play: "https://fmovies24.to/movie/the-dark-knight-n348" , year:"2023"}, 
+    { title: "Interstellar", description: "In einer nicht allzu fernen Zukunft: Auf der Erde sind Ressourcen knapp geworden, und die Menschheit steht vor dem Untergang. Ein Team von Forschern wird auf eine interstellare Reise geschickt, um einen neuen bewohnbaren Planeten für die Menschheit zu finden.", image: "https://de.web.img2.acsta.net/pictures/14/10/24/13/14/481915.jpg", trailer: "https://www.youtube.com/watch?v=zSWdZVtXT7E", imdb: "https://www.imdb.com/title/tt0816692/", rating: "8.6", play: "https://fmovies24.to/movie/interstellar-kwj4/1-1" , year:""},
+    { title: "The Shawshank Redemption", description: "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.", image: "https://m.media-amazon.com/images/M/MV5BNDE3ODcxYzMtY2YzZC00NmNlLWJiNDMtZDViZWM2MzIxZDYwXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg", trailer: "https://www.youtube.com/watch?v=6hB3S9bIaco", imdb: "https://www.imdb.com/title/tt0111161/", rating: "9.3", play: "https://fmovies24.to/movie/the-shawshank-redemption-1nom" , year:""},
+    { title: "The Matrix", description: "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.", image: "https://m.media-amazon.com/images/I/51EG732BV3L._AC_SY580_.jpg", trailer: "https://www.youtube.com/watch?v=vKQi3bBA1y8", imdb: "https://www.imdb.com/title/tt0133093/", rating: "8.7", play: "https://fmovies24.to/movie/the-matrix-jv58" , year:""},
+    { title: "The Prestige", description: "Two stage magicians engage in competitive one-upmanship in an attempt to create the ultimate stage illusion.", image: "https://www.hoefekino.de/fileadmin/_processed_/e/5/csm_prestige_927b1de790.jpg", trailer: "https://www.youtube.com/watch?v=o4gHCmTQDVI", imdb: "https://www.imdb.com/title/tt0482571/", rating: "8.5", play: "https://fmovies24.to/movie/the-prestige-jvk8" , year:""},
+    { title: "Pulp Fiction", description: "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.", image: "https://www.crew-united.com/Media/Images/457/457734/457734.entity.jpg", trailer: "https://www.youtube.com/watch?v=s7EdQ4FqbhY", imdb: "https://www.imdb.com/title/tt0110912/", rating: "8.9", play: "https://fmovies24.to/movie/pulp-fiction-m2zz" , year:""},
+    { title: "Fight Club", description: "An insomniac office worker and a devil-may-care soapmaker form an underground fight club that evolves into something much, much more.", image: "https://i.etsystatic.com/18242346/r/il/c9908e/2412674268/il_fullxfull.2412674268_1sgm.jpg", trailer: "https://www.youtube.com/watch?v=qtRKdVHc-cE", imdb: "https://www.imdb.com/title/tt0137523/", rating: "8.8", play: "https://fmovies24.to/movie/fight-club-9om0", year:"" },
+    { title: "Forrest Gump", description: "The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold from the perspective of an Alabama man with an IQ of 75, whose only desire is to be reunited with his childhood sweetheart.", image: "https://de.web.img3.acsta.net/pictures/bzp/01/10568.jpg", trailer: "https://www.youtube.com/watch?v=bLvqoHBptjg", imdb: "https://www.imdb.com/title/tt0109830/", rating: "8.8", play: "https://fmovies24.to/movie/forrest-gump-w1z7" , year:""},
+    { title: "Goodfellas", description: "The story of Henry Hill and his life in the mob, covering his relationship with his wife Karen Hill and his mob partners Jimmy Conway and Tommy DeVito in the Italian-American crime syndicate.", image: "https://m.media-amazon.com/images/M/MV5BY2NkZjEzMDgtN2RjYy00YzM1LWI4ZmQtMjIwYjFjNmI3ZGEwXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg", trailer: "https://www.youtube.com/watch?v=qo5jJpHtI1Y", imdb: "https://www.imdb.com/title/tt0099685/", rating: "8.7", play: "https://fmovies24.to/movie/goodfellas-6k1l" , year:""},
+    { title: "The Lord of the Rings: The Fellowship of the Ring", description: "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.", image: "https://m.media-amazon.com/images/M/MV5BN2EyZjM3NzUtNWUzMi00MTgxLWI0NTctMzY4M2VlOTdjZWRiXkEyXkFqcGdeQXVyNDUzOTQ5MjY@._V1_FMjpg_UX1000_.jpg", trailer: "https://www.youtube.com/watch?v=V75dMMIW2B4", imdb: "https://www.imdb.com/title/tt0120737/", rating: "8.8", play: "https://fmovies24.to/movie/the-lord-of-the-rings-the-fellowship-of-the-ring-extended-80ln" , year:""},
+    { title: "The Usual Suspects", description: "A sole survivor tells of the twisty events leading up to a horrific gun battle on a boat, which began when five criminals met at a seemingly random police lineup.", image: "https://m.media-amazon.com/images/M/MV5BYTViNjMyNmUtNDFkNC00ZDRlLThmMDUtZDU2YWE4NGI2ZjVmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg", trailer: "https://www.youtube.com/watch?v=oiXdPolca5w", imdb: "https://www.imdb.com/title/tt0114814/", rating: "8.5", play: "https://fmovies24.to/movie/the-usual-suspects-oj5y" , year:"" },
+    { title: "The Green Mile", description: "The lives of guards on Death Row are affected by one of their charges: a black man accused of child murder and rape, yet who has a mysterious gift.", image: "https://m.media-amazon.com/images/M/MV5BMTUxMzQyNjA5MF5BMl5BanBnXkFtZTYwOTU2NTY3._V1_FMjpg_UX1000_.jpg", trailer: "https://www.youtube.com/watch?v=Ki4haFrqSrw", imdb: "https://www.imdb.com/title/tt0120689/", rating: "8.6", play: "https://fmovies24.to/movie/the-green-mile-ll56" , year:"" },
+    { title: "The Pianist", description: "A Polish Jewish musician struggles to survive the destruction of the Warsaw ghetto of World War II.", image: "https://m.media-amazon.com/images/M/MV5BOWRiZDIxZjktMTA1NC00MDQ2LWEzMjUtMTliZmY3NjQ3ODJiXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg", trailer: "https://www.youtube.com/watch?v=u_jE7-6Uv7E", imdb: "https://www.imdb.com/title/tt0253474/", rating: "8.5" , play:"https://fmovies24.to/movie/the-pianist-m257" , year:"" },
+];
+
+const getBoxColor = (index) => {
+    switch (index) {
+        case 0:
+            return 'gold';
+        case 1:
+            return 'silver';
+        case 2:
+            return 'bronze';
+        default:
+            return '';
+    }
+};
+
+const topMovies = movies.slice(1, 4);
+const remainingMovies = movies.slice(4);
+
+---
+
+<MainLayout title="Movies.Horan">
+    <section class="container"
+    <div class="slider-wrapper active">
+        <div class="slider">
+            <video id="slide-1" autoplay muted loop playsinline class="unclickable">
+                <source src="https://cdn.discordapp.com/attachments/1229507953728684174/1259312349467119636/video2.mp4?ex=66907f85&is=668f2e05&hm=1d32212a1c410b7e470ffa998991d7d5063966359162783392f5e3dccaed73ae&" type="video/mp4">
+            </video>
+            <img id="slide-2" src="/images/Movie2.jpg" alt="movie photo" />
+            <img id="slide-3" src="https://media.discordapp.net/attachments/1229507953728684174/1259283838719492208/Movie3.jpg?ex=66910db7&is=668fbc37&hm=be1bcd86d5921e04f9ab40b600e257e291d9798a4dad0a3ed05020a37154f17c&=&format=webp&width=1441&height=449" alt="movie photo" />
+            <img id="slide-4" src="https://media.discordapp.net/attachments/1229507953728684174/1259283839017160815/Movie4.jpg?ex=66910db7&is=668fbc37&hm=3b75baba182f1ee8470349261d4b5f7c199f79951b3827b00613c352073108d6&=&format=webp&width=1441&height=449" alt="movie photo" />
+            <img id="slide-5" src="https://media.discordapp.net/attachments/1229507953728684174/1259283838153134254/Movie5.jpg?ex=66910db7&is=668fbc37&hm=66271e55a90aa3ef24887c6c11dad04c125f998c18e1afd5e593f302ebe2d0a8&=&format=webp&width=1441&height=449" alt="movie photo" />
+            <img id="slide-6" src="https://media.discordapp.net/attachments/1229507953728684174/1259294545355739196/movie6.jpg?ex=669117b0&is=668fc630&hm=9cc6d85cf66a38fd83d30c30736043defdf8ad437e88ec6c445461995a524090&=&format=webp&width=1441&height=449" alt="movie photo" />
+        </div>
+        <div class="slider-nav">
+            <a href="#slide-1"></a>
+            <a href="#slide-2"></a>
+            <a href="#slide-3"></a>
+            <a href="#slide-4"></a>
+            <a href="#slide-5"></a>
+            <a href="#slide-6"></a>
+        </div>
+    </div>  
+    </section>
+    
+    <div class="golden-box">
+        <div class="movie-section">
+            <h1 style="text-align: center; color: gold; font-size: 3rem; font-family: Georgia, serif;">
+                <span style="display: inline-flex; align-items: center;">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4452/4452126.png" alt="Trophy Icon" style="height: 1.5em; width: auto; margin-right: 20px;">
+                    THE BEST EVER
+                </span>
+            </h1>
+            <div class="special-movie">
+                <Card movie={movies.find(movie => movie.title === "The Godfather")}.special />
+                <div class="special-info">
+                    <h3>{movies.find(movie => movie.title === "The Godfather").title}</h3>
+                    <p>{movies.find(movie => movie.title === "The Godfather").description}</p>
+                    <div class="buttons">
+                        <a href={movies.find(movie => movie.title === "The Godfather").trailer} class="button" target="_blank">Watch Trailer</a>
+                        <a href={movies.find(movie => movie.title === "The Godfather").imdb} class="button" target="_blank">IMDb</a>
+                        <a href={movies.find(movie => movie.title === "The Godfather").play} class="button" target="_blank">Watch Movie </a>
+                    </div>
+                </div>
+                <div class="small-pictures">
+                    <img src="https://www.austinchronicle.com/binary/243c/SS.TheGodfather.jpg" alt="Scene 1" />
+                    <img src="https://m.media-amazon.com/images/M/MV5BYWNlN2U4YjQtMzI3NC00ZjkxLWEwMTItYWRlNDUxYTYwYjVlXkEyXkFqcGdeQWpvaG5oYXJ0._V1_QL75_UX500_CR0,0,500,281_.jpg" alt="Scene 2" />
+                    <img src="https://s3.amazonaws.com/static.rogerebert.com/uploads/review/primary_image/reviews/great-movie-the-godfather-1972/EB19970316REVIEWS08401010321AR.jpg" alt="Scene 3" />
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="movie-section">
+        <h1 style="text-align: center; color: white; font-size: 3rem;">
+            <span style="display: inline-flex; align-items: center;">
+                <img src="https://uxwing.com/wp-content/themes/uxwing/download/video-photography-multimedia/movie-icon.png" alt="Trophy Icon" style="height: 1.5em; width: auto; margin-right: 30px;">
+                    Top 3 Movies
+                <img src="https://uxwing.com/wp-content/themes/uxwing/download/video-photography-multimedia/movie-icon.png" alt="Movie Icon" style={{ height: "1.5em", width: "auto", marginLeft: "30px", transform: "scaleX(-1)" }} />
+            </span>
+            <br> 
+
+            <div class="year-container">
+                <label for="yearDropdown" style="color: white; font-size: 2rem; font-weight: bold;">Select Year:</label>
+                <select id="yearDropdown" onchange="handleYearChange(this.value)" class="year-dropdown">
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                </select>
+                <span id="yearBox" style="color: white; font-size: 1.2rem; padding: 8px;"></span>
+            </div>
+            
+        </h1>
+
+        <div class="movie-grid">
+            {topMovies.map((movie, index) => (
+                <div class={`movie-box ${getBoxColor(index)}`}>
+                    <div class="top-label" style={{ color: getBoxColor(index) }}>Top {index + 1}</div>
+                    <Card movie={movie} showDescription={true} />
+                    <div class="movie-details">
+                        <h3>{movie.title}</h3>
+                        <div class="movie-description">
+                            <p>{movie.description}</p>
+                            <div class="buttons">
+                                <a href={movie.trailer} class="button" target="_blank">Watch Trailer</a>
+                                <a href={movie.imdb} class="button" target="_blank">IMDb</a>
+                                <a href={movie.play} class="button" target="_blank">Watch Movie</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
     </div>
 
-    <div class="card">
-      <h2>Card 2</h2>
-      <p>This is the description for card 2.</p>
-      <!-- Image added here -->
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg" alt="Description of Image" class="card-image">
+    <div class="movie-section">
+        <h1 style="text-align: center; font-size: 3rem; color:white">People Also Like</h1>    
+        <div class="people-liked">
+            {remainingMovies.map((movie, index) => (
+                <div class="liked-item">
+                    <img src={movie.image} alt={movie.title} />
+                    <div class="liked-info">
+                        <h3>{movie.title}</h3>
+                        <p>{movie.description}</p>
+                        <div class="buttons">
+                            <a href={movie.trailer} class="button" target="_blank">Watch Trailer</a>
+                            <a href={movie.imdb} class="button" target="_blank">IMDb</a>
+                            <a href={movie.play} class="button" target="_blank">Watch Movie</a>
+                            <span style="color : white" class="rating">{movie.rating} </span>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
     </div>
-
-    <div class="card">
-      <h2>Card 3</h2>
-      <p>This is the description for card 3.</p>
-    </div>
-  </main>
-
-  <footer>
-    <p>&copy; 2024 My Astro Page TEST</p>
-  </footer>
-</body>
-</html>
-
+    <footer class="mt-8 py-4 text-center text-gray-600">
+        <h2 style="text-align: center; font-size: 1,5rem; color: white;">This Page Were Developed By 'MJO' Group</h2>      
+    </footer>
+</MainLayout>
 
 <style>
-    * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* Container settings */
+.container {
+    height: 300px; /* Fixed height for the container */
+    padding: 0; /* Negative padding doesn't work as intended */
+    margin-bottom: 30px;
+    border-radius: 2rem;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+/* Wrapper settings */
+.slider-wrapper {
+    position: relative;
+    max-width: 48rem; /* Maximum width of 48rem */
+    width: 100%; /* 100% width for responsive design */
+    margin: 0 auto; /* Center the wrapper */
 }
 
-header {
-  background-color: #4CAF50;
-  color: white;
-  padding: 1rem;
-  text-align: center;
+/* Slider settings */
+.slider {
+    display: flex;
+    overflow: hidden;
+    box-shadow: 0 1.5rem 3rem -0.75rem hsl(0deg 0% 0% / 25%);
+    border-radius: 2rem;
 }
 
-footer {
-  background-color: #4CAF50;
-  color: white;
-  text-align: center;
-  padding: 1rem;
-  margin-top: auto;
+/* Media settings */
+.slider img, .slider video {
+    width: 100%; 
+    height: 300px; 
+    flex: 0 0 auto; 
+    object-fit: cover;
+    transition: transform 1s ease;
+    animation: slide 30s infinite; 
 }
 
-main {
-  padding: 2rem;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+/* Animation settings */
+@keyframes slide {
+    0%, 12% {
+        transform: translateX(0);
+    }
+
+    14%, 26% {
+        transform: translateX(-100%);
+    }
+
+    28%, 40% {
+        transform: translateX(-200%);
+    }
+
+    42%, 54% {
+        transform: translateX(-300%);
+    }
+
+    56%, 68% {
+        transform: translateX(-400%);
+    }
+
+    70%, 82% {
+        transform: translateX(-500%);
+    }
+
+    84%, 96% {
+        transform: translateX(0);
+    }
 }
 
-.card {
-  border: 1px solid #ccc;
-  padding: 1rem;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+/* Responsive settings */
+@media (width <= 768px) {
+    .container {
+        height: 200px; /* Adjust height for smaller screens */
+    }
+
+    .slider img, .slider video {
+        height: 200px; /* Adjust height for smaller screens */
+    }
 }
 
-.card h2 {
-  margin-top: 0;
+@media (width <= 480px) {
+    .container {
+        height: 150px; /* Adjust height for smaller screens */
+    }
+
+    .slider img, .slider video {
+        height: 150px; /* Adjust height for smaller screens */
+    }
 }
 
-.card-image {
-  max-width: 100%;
-  height: auto;
-  margin-top: 1rem;
-  border-radius: 8px;
+.small-pictures {
+    margin-top: 1px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.small-pictures img {
+    width: 200px; /* Increased size */
+    height: auto;
+    margin: 15px;
+    transition: transform 0.3s; /* Smooth transition for zoom effect */
+}
+
+.liked-item img {
+    width: 100px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.small-pictures img:hover {
+    transform: scale(1.2); /* Zoom-in effect */
+}
+
+.golden-box {
+    position: relative; 
+    display: flex; 
+    align-items: center;
+    justify-content: center; 
+    padding: 1px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.golden-box::before {
+    content: ''; 
+    position: absolute; 
+    inset: 0;
+    background: url('https://cdn.discordapp.com/attachments/1229507953728684174/1259284356049145929/edg.png?ex=668b1f72&is=6689cdf2&hm=e847005728ff3f981cedf7052bc15a96e6b8e3d2db57ed93751b28dcf282fae6&');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    z-index: -2; 
+    border-radius: 20px;
+}
+
+.golden-box::after {
+    content: ''; 
+    position: absolute;
+    inset: 0;
+    z-index: -1; 
+    border-radius: 20px; 
+} 
+
+.movie-section {
+    position: relative; 
+    z-index: 1; 
+    margin-bottom: 10rem;
+}
+
+.year-container {
+    display: flex; /* Use flexbox for easier alignment */
+    align-items: center; /* Align items vertically */
+    justify-content: center;
+}
+
+.year-dropdown {
+    font-size: 1.2rem;
+    padding: 8px;
+    width: 80px; /* Adjust width as necessary */
+    margin-left: 10px;
+}
+
+.people-liked {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 1rem;
+    justify-content: center;
+}
+
+.special-movie {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.special-info {
+    max-width: 300px; /* Adjust width for description */
+    color: white; /* Text color for description */
+}
+
+.special-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.special-info p {
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.movie-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 3px solid transparent; /* Initial transparent border */
+    position: relative;
+}
+
+.gold {
+    border-color: #ffd900d2; /* Gold border color */
+}
+
+.silver {
+    border-color: #b3b1b1d2; /* Silver border color */
+}
+
+.bronze {
+    border-color: #854f19; /* Bronze border color */
+}
+
+.top-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgb(0 0 0 / 70%); /* Semi-transparent background for label */
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    z-index: 1;
+}
+
+.movie-details {
+    padding: 1rem;
+}
+
+.movie-details h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: white; /* Text color */
+}
+
+.movie-description {
+    margin-top: 1rem;
+    text-align: left;
+}
+
+.movie-description p {
+    font-size: 1rem;
+    line-height: 1.4;
+    color: white; /* Text color */
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.button {
+    background: #d6c314;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.button:hover {
+    background: #c0ab12;
+}
+
+.rating {
+    color: white;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    align-self: center;
+}
+
+.liked-item {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.liked-info {
+    flex: 1;
+    color: white; /* Text color */
+    max-width: 70%;
+}
+
+.liked-info h3 {
+    font-size: 1.5rem;
+    max-width: 70%;
+    margin-bottom: 0.5rem;
+}
+
+.liked-info p {
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.liked-info .buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.liked-info .description {
+    font-size: 1rem;
+    line-height: 1.4;
+    color: white;
+    margin-top: 0.5rem;
+    max-height: 5rem; /* Example: Adjust the max-height to limit the description text */
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 </style>

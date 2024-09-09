@@ -1,23 +1,167 @@
-.
 ---
-const { title, description } = Astro.props;
+interface Props {
+    movie: {
+        title: string;
+        description: string;
+        image: string;
+        trailer: string;
+        imdb: string; 
+        play: string; 
+        rating: string;
+        year: string;
+    };
+    showDescription?: boolean; // Optional prop to show description on the card
+}
+
+const { movie, showDescription = false } = Astro.props;
 ---
 
-<div class="card">
-  <h2>{title}</h2>
-  <p>{description}</p>
+<li class="card">
+    <div class="card-inner">
+        <div class="card-front">
+            <div class="cover-image">
+                <img src={movie.image} alt={movie.title} />
+                <div class="rating">{movie.rating}</div>
+                <div class="movie-info">
+                    <h3 style="color: gold; font-size: 1.2rem;">{movie.title}</h3>
+                    <p>{showDescription ? movie.description : ''}</p>
+                    <div class="buttons">
+                        <a href={movie.trailer} class="button" target="_blank">Watch Trailer</a>
+                        <a href={movie.imdb} class="button" target="_blank">IMDb</a>
+                        <a href={movie.play} class="button" target="_blank">Wacth Movie</a>
+                    </div>
+                </div>
+            </div>
+            {!showDescription && (
+                <div class="movie-description">
+                    <h3 style="color: gold; font-size: 1.2rem;">{movie.title}</h3>
+                    <p>{movie.description}</p>
+                    <div class="buttons">
+                        <a href={movie.trailer} class="button" target="_blank">Watch Trailer</a>
+                        <a href={movie.imdb} class="button" target="_blank">IMDb</a>
+                        <a href={movie.play} class="button" target="_blank">Watch Movie</a>
+                    </div>
+                </div>
+            )}
+        </div>
+    </div>
+</li>
 
-  <style>
+
+<style>
     .card {
-      border: 1px solid #ccc;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      border-radius: 8px;
-      background-color: #f9f9f9;
+        perspective: 900px;
+        width: 270px;     
     }
 
-    h2 {
-      margin-top: 0;
+    .card-inner {
+        position: relative;
+        width: 100%;
+        height: 400px;
+        transform-style: preserve-3d;
+        transition: transform 0.6s;
     }
-  </style>
-</div>
+
+    .card-front {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        overflow: hidden;
+        border-radius: 8px;
+        background: #23262d;
+    }
+
+    .cover-image {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        perspective: 1000px;
+    }
+
+    .cover-image img {
+    width: 100%; /* Ensure the image fills its container */
+    height: 100%; /* Ensure the image fills its container */
+    object-fit: cover; /* Maintain aspect ratio and cover container */
+    border-radius: 8px; /* Optional: Rounded corners */
+    }
+
+    .rating {
+        background: gold;
+        padding: 0.5rem;
+        border-radius: 5px;
+        font-weight: bold;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+
+    .movie-info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgb(35 38 45 / 80%); /* Semi-transparent background */
+        padding: 1rem;
+        text-align: center;
+        transform: translateY(100%);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .movie-info h3 {
+        color: gold;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .movie-info p {
+        color: white;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .cover-image:hover .movie-info {
+        /* transform: translateY(0); */
+    }
+
+    .movie-description {
+        padding: 1rem;
+        text-align: center;
+        color: white;
+    }
+
+    .movie-description h3 {
+        color: gold;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .movie-description p {
+        font-size: 0.9rem;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .button {
+        background: #865ae5;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background 0.3s;
+    }
+
+    .button:hover {
+        background: #6441a5;
+    }
+
+
+</style>
