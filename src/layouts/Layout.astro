@@ -1,257 +1,52 @@
 ---
-interface Props {
-    title: string;
-}
-
 const { title } = Astro.props;
 ---
 
-<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
-</head>
-<body>
-    <header>
-        <h1>{title}</h1>
-        <nav>
-            <ul id="nav-list">
-                <li><a href="/">HOME</a></li>
-                <li><a href="/actors">ACTORS</a></li>
-                <li><a href="/about">ABOUT US</a></li>
-                <li><a href="/settings">SETTINGS</a></li>
-            </ul>
-            
-        </nav>
-        <div class="header-options">
-            <div class="dropdown">
-                <button id="language-btn">EN</button>
-                <div id="language-dropdown" class="dropdown-content">
-                    <button class="lang-option" data-lang="EN">EN</button>
-                    <button class="lang-option" data-lang="FR">FR</button>
-                    <button class="lang-option" data-lang="AR">AR</button>
-                    <button class="lang-option" data-lang="DE">DE</button>
-                </div>
-            </div>
-            <div class="spacer"></div> <!-- Spacer for additional space -->
-            <button id="login-btn">Login</button>
-        </div>
-    </header>
-    <main>
-        <slot />
-    </main>
-
-    <script>
-        const loginBtn = document.getElementById('login-btn');
-        const languageBtn = document.getElementById('language-btn');
-        const languageDropdown = document.getElementById('language-dropdown');
-        const langOptions = document.querySelectorAll('.lang-option');
-        const navList = document.getElementById('nav-list');
-
-        let user = null;
-        let currentLang = 'EN'; // Default language
-
-        // Function to update UI based on selected language
-        function updateLanguage(lang) {
-            switch (lang) {
-                case 'EN':
-                    navList.innerHTML = `
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/actors">Actors</a></li>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/settings">Settings</a></li>
-                        <li><a href="/settings">Settings</a></li>
-                    `;
-                    break;
-                case 'FR':
-                    navList.innerHTML = `
-                        <li><a href="/">Accueil</a></li>
-                        <li><a href="/actors">Acteurs</a></li>
-                        <li><a href="/about">À Propos</a></li>
-                        <li><a href="/settings">Paramètres</a></li>
-                    `;
-                    break;
-                case 'AR':
-                    navList.innerHTML = `
-                        <li><a href="/">الصفحة الرئيسية</a></li>
-                        <li><a href="/actors">الممثلون</a></li>
-                        <li><a href="/about">تعرف علينا</a></li>
-                        <li><a href="/settings">الإعدادات</a></li>
-                    `;
-                    break;
-                case 'DE':
-                    navList.innerHTML = `
-                        <li><a href="/">Startseite</a></li>
-                        <li><a href="/actors">Schauspieler</a></li>
-                        <li><a href="/about">Über Uns</a></li>
-                        <li><a href="/settings">Einstellungen</a></li>
-                    `;
-                    break;
-                default:
-                    navList.innerHTML = `
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/actors">Actors</a></li>
-                        <li><a href="/about">About Us</a></li>
-                        <li><a href="/settings">Settings</a></li>
-                    `;
-            }
-        }
-
-        // Event listener for login button
-        loginBtn.addEventListener('click', () => {
-            if (!user) {
-                user = prompt("Enter Your Name:");
-                if (user) {
-                    loginBtn.textContent = `Welcome, ${user}`;
-                }
-            } else {
-                const logout = confirm("Do You Want To Log Out?");
-                if (logout) {
-                    user = null;
-                    loginBtn.textContent = 'Login';
-                }
-            }
-        });
-
-        // Event listener for language button
-        languageBtn.addEventListener('click', () => {
-            languageDropdown.classList.toggle('show');
-        });
-
-        // Event listeners for language options
-        langOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                const selectedLang = option.getAttribute('data-lang');
-                languageBtn.textContent = selectedLang;
-                updateLanguage(selectedLang);
-                languageDropdown.classList.remove('show');
-            });
-        });
-    </script>
-</body>
-</html>
-
-<style is:global>
-
-   html {
-      font-family: system-ui, sans-serif;
-      background: #13151a;
-      background-size: cover;
-    }
-    
-    code {
-        font-family:
-            Menlo,
-            Monaco,
-            "Lucida Console",
-            "Liberation Mono",
-            "DejaVu Sans Mono",
-            "Bitstream Vera Sans Mono",
-            "Courier New",
-            monospace;
-    }
-
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 2rem;
-
-        /* background: url('https://cdn.discordapp.com/attachments/1229507953728684174/1259284356355063950/Headerpicture.jpg?ex=668b1f72&is=6689cdf2&hm=eea218cfe10e6f2aa2abca1eeaf0ef6c9f690e33e17358a9236721f404b1cccb&');
-        */
-
-color: rgb(219 191 30);
-    }
-
-    header h1 {
-        margin: 0;
-        font-size: 2rem;
-        animation: slide-in 1s ease-out forwards;
-        color: rgb(255 255 255); /* Gold color for website name */
-    }
-
-    nav ul {
-        display: flex;
-        list-style: none;
+    <style>
+      body {
+        font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
-    }
-
-    nav ul li {
-        margin: 0 1rem;
-    }
-
-    nav ul li a {
-        color: gold; /* Gold color for navigation links */
-        text-decoration: none;
-        transition: color 0.3s;
-    }
-
-    nav ul li a:hover {
-        color: white; /* Hover effect to white */
-    }
-
-    .header-options {
         display: flex;
-        align-items: center;
-    }
+        flex-direction: column;
+        min-height: 100vh;
+      }
 
-    .dropdown {
-        position: relative;
-        margin-left: 0.5rem; /* Adjusted margin between buttons */
-    }
+      header {
+        background-color: #4CAF50;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+      }
 
-    .spacer {
-        width: 1rem; /* Space between language dropdown and login button */
-    }
-
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #f9f9f9;
-        min-width: 60px;
-        box-shadow: 0 8px 16px 0 rgb(0 0 0 / 20%);
-        z-index: 1;
-    }
-
-    button {
-        background: gold; /* Gold color for buttons */
-        color: black;
-        padding: 0.5rem 1rem;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background 0.3s;
-    }
-
-    .dropdown-content button {
-        background: none;
-        border: none;
-        padding: 0.5rem 1rem;
-        cursor: pointer;
-        width: 100%;
-        text-align: left;
-    }
-
-    .show {
-        display: block;
-    }
-
-
-    button:hover {
-        background: #daa520; /* Darker gold on hover */
-    }
-
-    .dropdown-content button:hover {
-      background-color: #f1f1f1;
-  }
-
-    main {
+      footer {
+        background-color: #4CAF50;
+        color: white;
+        text-align: center;
+        padding: 1rem;
+        margin-top: auto;
+      }
+      
+      main {
+        flex-grow: 1;
         padding: 2rem;
-    }
-</style>
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>{title}</h1>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <p>&copy; 2024 My Astro Page</p>
+    </footer>
+  </body>
+</html>
