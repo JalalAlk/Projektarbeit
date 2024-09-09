@@ -24,7 +24,7 @@ const config: PlaywrightTestConfig = {
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] }, // Konfiguration für Chromium (Desktop)
+      use: { ...devices['Desktop Chrome'] }, // Konfiguration für Chromium (Desktop).
     },
     {
       name: 'firefox',
