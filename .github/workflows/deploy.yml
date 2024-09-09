@@ -46,11 +46,6 @@ jobs:
       - name: Run tests
         run: npm run test
 
-      - name: Prepare deployment
-        run: |
-          npx astro build
-          touch dist/.nojekyll
-          ls -la dist || echo "Directory not found"
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
