@@ -2,36 +2,44 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
 jobs:
-  build:
+  build_and_deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
           node-version: '20'
+
       - name: Install dependencies
         run: npm install
-      - name: Build the site
-        run: npm run build
-        env:
-          NODE_ENV: production
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run linting
+        run: npm run lint
+
+      - name: Build your site
+        uses: withastro/action@v2
+       
+      - name: Run test
+        run: npm run test
+
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
-        
-          

@@ -17,6 +17,7 @@
     "test:ui": "playwright test --ui",
     "test:report": "playwright show-report",
     "format": "prettier --write ."
+    
   },
   "dependencies": {
     "open": "^10.1.0"
