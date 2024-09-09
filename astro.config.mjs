@@ -4,5 +4,6 @@ import { defineConfig } from 'astro/config';
 //test
 export default defineConfig({
   site: 'https://projektarbeit.github.io/',
+  base: '/Projektarbeit/',
 
 });
