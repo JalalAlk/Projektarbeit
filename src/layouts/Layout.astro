@@ -22,9 +22,8 @@ const { title } = Astro.props;
         <nav>
             <ul id="nav-list">
                 <li><a href={`${import.meta.env.BASE_URL}`}>HOME</a></li>
-                <li><a href="/actors">ACTORS</a></li>
-                <li><a href="/about">ABOUT US</a></li>
-                <li><a href="/settings">SETTINGS</a></li>
+                <li><a href={`${import.meta.env.BASE_URL}actors`}>ACTORS</a></li>
+                <li><a href={`${import.meta.env.BASE_URL}about`}>ABOUT US</a></li>
             </ul>
             
         </nav>
@@ -64,8 +63,6 @@ const { title } = Astro.props;
                         <li><a href="/">Home</a></li>
                         <li><a href="/actors">Actors</a></li>
                         <li><a href="/about">About Us</a></li>
-                        <li><a href="/settings">Settings</a></li>
-                        <li><a href="/settings">Settings</a></li>
                     `;
                     break;
                 case 'FR':
@@ -73,7 +70,6 @@ const { title } = Astro.props;
                         <li><a href="/">Accueil</a></li>
                         <li><a href="/actors">Acteurs</a></li>
                         <li><a href="/about">À Propos</a></li>
-                        <li><a href="/settings">Paramètres</a></li>
                     `;
                     break;
                 case 'AR':
@@ -81,7 +77,6 @@ const { title } = Astro.props;
                         <li><a href="/">الصفحة الرئيسية</a></li>
                         <li><a href="/actors">الممثلون</a></li>
                         <li><a href="/about">تعرف علينا</a></li>
-                        <li><a href="/settings">الإعدادات</a></li>
                     `;
                     break;
                 case 'DE':
@@ -89,7 +84,6 @@ const { title } = Astro.props;
                         <li><a href="/">Startseite</a></li>
                         <li><a href="/actors">Schauspieler</a></li>
                         <li><a href="/about">Über Uns</a></li>
-                        <li><a href="/settings">Einstellungen</a></li>
                     `;
                     break;
                 default:
@@ -97,7 +91,6 @@ const { title } = Astro.props;
                         <li><a href="/">Home</a></li>
                         <li><a href="/actors">Actors</a></li>
                         <li><a href="/about">About Us</a></li>
-                        <li><a href="/settings">Settings</a></li>
                     `;
             }
         }
@@ -161,10 +154,6 @@ const { title } = Astro.props;
         justify-content: space-between;
         align-items: center;
         padding: 1rem 2rem;
-
-        /* background: url('https://cdn.discordapp.com/attachments/1229507953728684174/1259284356355063950/Headerpicture.jpg?ex=668b1f72&is=6689cdf2&hm=eea218cfe10e6f2aa2abca1eeaf0ef6c9f690e33e17358a9236721f404b1cccb&');
-        */
-
 color: rgb(219 191 30);
     }
 

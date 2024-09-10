@@ -1,0 +1,323 @@
+
+/* Container settings */
+.container {
+    height: 300px; /* Fixed height for the container */
+    padding: 0; /* Negative padding doesn't work as intended */
+    margin-bottom: 30px;
+    border-radius: 2rem;
+}
+
+/* Wrapper settings */
+.slider-wrapper {
+    position: relative;
+    max-width: 48rem; /* Maximum width of 48rem */
+    width: 100%; /* 100% width for responsive design */
+    margin: 0 auto; /* Center the wrapper */
+}
+
+/* Slider settings */
+.slider {
+    display: flex;
+    overflow: hidden;
+    box-shadow: 0 1.5rem 3rem -0.75rem hsl(0deg 0% 0% / 25%);
+    border-radius: 2rem;
+}
+
+/* Media settings */
+.slider img, .slider video {
+    width: 100%; 
+    height: 300px; 
+    flex: 0 0 auto; 
+    object-fit: cover;
+    transition: transform 1s ease;
+    animation: slide 30s infinite; 
+}
+
+/* Animation settings */
+@keyframes slide {
+    0%, 12% {
+        transform: translateX(0);
+    }
+
+    14%, 26% {
+        transform: translateX(-100%);
+    }
+
+    28%, 40% {
+        transform: translateX(-200%);
+    }
+
+    42%, 54% {
+        transform: translateX(-300%);
+    }
+
+    56%, 68% {
+        transform: translateX(-400%);
+    }
+
+    70%, 82% {
+        transform: translateX(-500%);
+    }
+
+    84%, 96% {
+        transform: translateX(0);
+    }
+}
+
+/* Responsive settings */
+@media (width <= 768px) {
+    .container {
+        height: 200px; /* Adjust height for smaller screens */
+    }
+
+    .slider img, .slider video {
+        height: 200px; /* Adjust height for smaller screens */
+    }
+}
+
+@media (width <= 480px) {
+    .container {
+        height: 150px; /* Adjust height for smaller screens */
+    }
+
+    .slider img, .slider video {
+        height: 150px; /* Adjust height for smaller screens */
+    }
+}
+
+.small-pictures {
+    margin-top: 1px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.small-pictures img {
+    width: 200px; /* Increased size */
+    height: auto;
+    margin: 15px;
+    transition: transform 0.3s; /* Smooth transition for zoom effect */
+}
+
+.liked-item img {
+    width: 100px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.small-pictures img:hover {
+    transform: scale(1.2); /* Zoom-in effect */
+}
+
+.golden-box {
+    position: relative; 
+    display: flex; 
+    align-items: center;
+    justify-content: center; 
+    padding: 1px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.golden-box::before {
+    content: ''; 
+    position: absolute; 
+    inset: 0;
+    background: url('https://cdn.discordapp.com/attachments/1229507953728684174/1259284356049145929/edg.png?ex=668b1f72&is=6689cdf2&hm=e847005728ff3f981cedf7052bc15a96e6b8e3d2db57ed93751b28dcf282fae6&');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    z-index: -2; 
+    border-radius: 20px;
+}
+
+.golden-box::after {
+    content: ''; 
+    position: absolute;
+    inset: 0;
+    z-index: -1; 
+    border-radius: 20px; 
+} 
+
+.movie-section {
+    position: relative; 
+    z-index: 1; 
+    margin-bottom: 10rem;
+}
+
+.year-container {
+    display: flex; /* Use flexbox for easier alignment */
+    align-items: center; /* Align items vertically */
+    justify-content: center;
+}
+
+.year-dropdown {
+    font-size: 1.2rem;
+    padding: 8px;
+    width: 80px; /* Adjust width as necessary */
+    margin-left: 10px;
+}
+
+.people-liked {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 1rem;
+    justify-content: center;
+}
+
+.special-movie {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.special-info {
+    max-width: 300px; /* Adjust width for description */
+    color: white; /* Text color for description */
+}
+
+.special-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.special-info p {
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.movie-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 3px solid transparent; /* Initial transparent border */
+    position: relative;
+}
+
+.gold {
+    border-color: #ffd900d2; /* Gold border color */
+}
+
+.silver {
+    border-color: #b3b1b1d2; /* Silver border color */
+}
+
+.bronze {
+    border-color: #854f19; /* Bronze border color */
+}
+
+.top-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgb(0 0 0 / 70%); /* Semi-transparent background for label */
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    z-index: 1;
+}
+
+.movie-details {
+    padding: 1rem;
+}
+
+.movie-details h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: white; /* Text color */
+}
+
+.movie-description {
+    margin-top: 1rem;
+    text-align: left;
+}
+
+.movie-description p {
+    font-size: 1rem;
+    line-height: 1.4;
+    color: white; /* Text color */
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.button {
+    background: #d6c314;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.button:hover {
+    background: #c0ab12;
+}
+
+.rating {
+    color: white;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    align-self: center;
+}
+
+.liked-item {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.liked-info {
+    flex: 1;
+    color: white; /* Text color */
+    max-width: 70%;
+}
+
+.liked-info h3 {
+    font-size: 1.5rem;
+    max-width: 70%;
+    margin-bottom: 0.5rem;
+}
+
+.liked-info p {
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.liked-info .buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.liked-info .description {
+    font-size: 1rem;
+    line-height: 1.4;
+    color: white;
+    margin-top: 0.5rem;
+    max-height: 5rem; /* Example: Adjust the max-height to limit the description text */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
