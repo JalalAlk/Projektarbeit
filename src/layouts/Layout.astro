@@ -21,9 +21,10 @@ const { title } = Astro.props;
         <h1>{title}</h1>
         <nav>
             <ul id="nav-list">
-                <li><a href={`${import.meta.env.BASE_URL}`}>HOME</a></li>
+                <li><a href={`${import.meta.env.BASE_URL}Home`}>HOME</a></li>
                 <li><a href={`${import.meta.env.BASE_URL}actors`}>ACTORS</a></li>
                 <li><a href={`${import.meta.env.BASE_URL}about`}>ABOUT US</a></li>
+                <li><a href={`${import.meta.env.BASE_URL}settings`}>SETTINGS</a></li>
             </ul>
             
         </nav>

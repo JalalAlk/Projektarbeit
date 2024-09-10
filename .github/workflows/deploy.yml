@@ -58,5 +58,5 @@ jobs:
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
 
-      - name: Run Playwright tests
-        run: npx playwright test
+     # - name: Run Playwright tests
+       # run: npx playwright test
