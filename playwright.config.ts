@@ -12,7 +12,7 @@ const config: PlaywrightTestConfig = {
   webServer: {
     command: 'npm run preview', // Befehl zum Starten des lokalen Webservers
     url: 'http://localhost:4321/', // URL des lokalen Webservers
-    timeout: 120 * 1000, // Timeout für Anfragen an den Webserver (2 Minuten)
+    //timeout: 120 * 1000, // Timeout für Anfragen an den Webserver (2 Minuten)
     reuseExistingServer: !process.env.CI, // Wiederverwendung eines bereits laufenden Webservers, wenn möglich (nicht in CI-Umgebung)
   },
 
