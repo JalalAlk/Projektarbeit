@@ -1,46 +1,62 @@
-name: Deploy to GitHub Pages
+name: GitHub Pages Astro CI
 
 on:
   push:
-    branches: 
-      - main
-  workflow_dispatch:
-
-permissions:
-  contents: write
-  pages: write
-  id-token: write
+    branches:
+      - main  # Trigger deployment on main branch
+  pull_request:
 
 jobs:
-  build_and_deploy:
+  deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          submodules: true  # Fetch submodules if any
+          fetch-depth: 0    # Fetch all history.
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20'
+          node-version: 'lts/*'  # Set Node.js version to lts/*.
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install dependencies and Playwright browsers
+        run: |
+          npm install
+          npx playwright install --with-deps
 
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+      - name: Run ESLint
+        run: npx eslint .
 
-      - name: Run linting
-        run: npm run lint
+      - name: Run Stylelint
+        run: npx stylelint "src/**/*.astro"
 
-      - name: Build your site
-        uses: withastro/action@v2
+      - name: Run HTMLHint
+        run: npx htmlhint "**/*.html"
 
-      - name: Run test
+      - name: Run Astro Lint
+        run: npx astro lint
+
+      - name: Build project
+        run: npm run build
+
+      - name: Run tests
         run: npm run test
 
+
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist  # Directory to deploy
+          publish_branch: gh-pages  # Specify the branch to publish to
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Run Playwright tests
+        run: npx playwright test

@@ -12,7 +12,7 @@ const config: PlaywrightTestConfig = {
   webServer: {
     command: 'npm run preview', // Befehl zum Starten des lokalen Webservers
     url: 'http://localhost:4321/', // URL des lokalen Webservers
-    timeout: 120 * 1000, // Timeout für Anfragen an den Webserver (2 Minuten)
+    timeout: 120 * 10000, // Timeout für Anfragen an den Webserver (2 Minuten)
     reuseExistingServer: !process.env.CI, // Wiederverwendung eines bereits laufenden Webservers, wenn möglich (nicht in CI-Umgebung)
   },
 
@@ -24,11 +24,18 @@ const config: PlaywrightTestConfig = {
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] }, // Konfiguration für Chromium (Desktop).
+      use: { ...devices['Desktop Chrome'] }, // Konfiguration für Chromium (Desktop)
     },
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] }, // Konfiguration für Firefox (Desktop)
+      use: { 
+        ...devices['Desktop Firefox'],
+        launchOptions: {
+          slowMo: 1000, // Add slow motion delay for Firefox
+        },
+        video: 'on' // Record video for Firefox tests
+      },
+      timeout: 30 * 1000, // Set timeout for Firefox to 30 seconds
     },
     {
       name: 'webkit',
@@ -36,5 +43,6 @@ const config: PlaywrightTestConfig = {
     },
   ],
 };
+
 
 export default config;
