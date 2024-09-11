@@ -11,13 +11,14 @@ const config: PlaywrightTestConfig = {
 
   webServer: {
     command: 'npm run preview', 
-    url: 'http://localhost:4321/', 
+    url: 'http://localhost:4321/Projektarbeit/', 
     timeout: 120 * 1000, 
+    stdout: "pipe",
     reuseExistingServer: !process.env.CI, 
   },
 
   use: {
-    baseURL: 'http://localhost:4321/', 
+    baseURL: 'http://localhost:4321/Projektarbeit/', 
     trace: 'on-first-retry',   
   },
 
