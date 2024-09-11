@@ -3,7 +3,7 @@ name: GitHub Pages Astro CI
 on:
   push:
     branches:
-      - main  # Trigger deployment on main branch
+      - main  
   pull_request:
 
 jobs:
@@ -17,13 +17,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          submodules: true  # Fetch submodules if any
-          fetch-depth: 0    # Fetch all history.
-
+          submodules: true  
+          fetch-depth: 0   
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 'lts/*'  # Set Node.js version to lts/*.
+          node-version: 'lts/*'  
 
       - name: Install dependencies and Playwright browsers
         run: |
@@ -53,8 +52,8 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist  # Directory to deploy
-          publish_branch: gh-pages  # Specify the branch to publish to
+          publish_dir: ./dist  
+          publish_branch: gh-pages  
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
 

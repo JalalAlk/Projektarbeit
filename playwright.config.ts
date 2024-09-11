@@ -4,42 +4,43 @@ import { devices } from '@playwright/test';
 const config: PlaywrightTestConfig = {
   testDir: './tests-examples',
   fullyParallel: true,
-  forbidOnly: !!process.env.CI, // Verbiete 'test.only' in der Testsuite, wenn CI aktiviert ist
-  retries: process.env.CI ? 2 : 0, // Wiederholungsversuche für fehlgeschlagene Tests (auf 2 gesetzt, wenn CI aktiviert ist)
-  workers: process.env.CI ? 1 : undefined, // Anzahl der Worker für parallele Ausführung (auf 1 gesetzt, wenn CI aktiviert ist)
-  reporter: 'html', // Verwendeter Reporter für die Testergebnisse
+  forbidOnly: !!process.env.CI, 
+  retries: process.env.CI ? 2 : 0, 
+  workers: process.env.CI ? 1 : undefined, 
+  reporter: 'html', 
 
   webServer: {
-    command: 'npm run preview', // Befehl zum Starten des lokalen Webservers
-    url: 'http://localhost:4321/', // URL des lokalen Webservers
-    timeout: 120 * 1000, // Timeout für Anfragen an den Webserver (2 Minuten)
-    reuseExistingServer: !process.env.CI, // Wiederverwendung eines bereits laufenden Webservers, wenn möglich (nicht in CI-Umgebung)
+    command: 'npm run preview', 
+    url: 'http://localhost:4321/', 
+    timeout: 120 * 1000, 
+    reuseExistingServer: !process.env.CI, 
   },
 
   use: {
-    baseURL: 'http://localhost:4321/', // Basis-URL für die Tests
-    trace: 'on-first-retry', // Erfassen von Traces bei erster Wiederholung eines fehlgeschlagenen Tests  
+    baseURL: 'http://localhost:4321/', 
+    trace: 'on-first-retry',   
   },
 
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] }, // Konfiguration für Chromium (Desktop)
+      use: { 
+        ...devices['Desktop Chrome'] }, 
     },
     {
       name: 'firefox',
       use: { 
         ...devices['Desktop Firefox'],
         launchOptions: {
-          slowMo: 1000, // Add slow motion delay for Firefox
+          slowMo: 1000, 
         },
-        video: 'on' // Record video for Firefox tests
+        video: 'on' 
       },
-      timeout: 30 * 1000, // Set timeout for Firefox to 30 seconds
+      timeout: 30 * 1000, 
     },
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] }, // Konfiguration für WebKit (Desktop)
+      use: { ...devices['Desktop Safari'] }, 
     },
   ],
 };

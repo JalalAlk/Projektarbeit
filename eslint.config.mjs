@@ -4,11 +4,11 @@ import astroPlugin from 'eslint-plugin-astro';
 import astroParser from 'astro-eslint-parser';
 
 export default [
-  // Globale Einstellungen
+  
   { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,
 
-  // Astro-spezifische Einstellungen
+
   {
     files: ["*.astro"],
     plugins: {
@@ -31,7 +31,7 @@ export default [
     },
   },
 
-  // Einstellungen für JavaScript in .astro-Dateien
+ 
   {
     files: ["**/*.astro/*.js", "*.astro/*.js"],
     env: {
@@ -46,7 +46,7 @@ export default [
     },
   },
 
-  // Standard-Regeln
+  
   {
     files: ["*.js"],
     rules: {
