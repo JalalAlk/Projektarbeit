@@ -53,36 +53,36 @@ const { title } = Astro.props;
         const navList = document.getElementById('nav-list');
 
         let user = null;
-        let currentLang = 'EN'; // Default language
+        let currentLang = 'EN'; 
 
-        // Function to update UI based on selected language
+        
         function updateLanguage(lang) {
             switch (lang) {
                 case 'EN':
                     navList.innerHTML = `
                         <li><a href="/">Home</a></li>
-                        <li><a href="/actors">Actors</a></li>
+                        <li><a href="/actor">Actors</a></li>
                         <li><a href="/about">About Us</a></li>
                     `;
                     break;
                 case 'FR':
                     navList.innerHTML = `
                         <li><a href="/">Accueil</a></li>
-                        <li><a href="/actors">Acteurs</a></li>
+                        <li><a href="/actor">Acteurs</a></li>
                         <li><a href="/about">À Propos</a></li>
                     `;
                     break;
                 case 'AR':
                     navList.innerHTML = `
                         <li><a href="/">الصفحة الرئيسية</a></li>
-                        <li><a href="/actors">الممثلون</a></li>
+                        <li><a href="/actor">الممثلون</a></li>
                         <li><a href="/about">تعرف علينا</a></li>
                     `;
                     break;
                 case 'DE':
                     navList.innerHTML = `
                         <li><a href="/">Startseite</a></li>
-                        <li><a href="/actors">Schauspieler</a></li>
+                        <li><a href="/actor">Schauspieler</a></li>
                         <li><a href="/about">Über Uns</a></li>
                     `;
                     break;
@@ -95,7 +95,7 @@ const { title } = Astro.props;
             }
         }
 
-        // Event listener for login button
+        
         loginBtn.addEventListener('click', () => {
             if (!user) {
                 user = prompt("Enter Your Name:");
@@ -111,12 +111,12 @@ const { title } = Astro.props;
             }
         });
 
-        // Event listener for language button
+        
         languageBtn.addEventListener('click', () => {
             languageDropdown.classList.toggle('show');
         });
 
-        // Event listeners for language options
+        
         langOptions.forEach(option => {
             option.addEventListener('click', () => {
                 const selectedLang = option.getAttribute('data-lang');
@@ -153,19 +153,15 @@ const { title } = Astro.props;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem 2rem;
-
-        /* background: url('https://cdn.discordapp.com/attachments/1229507953728684174/1259284356355063950/Headerpicture.jpg?ex=668b1f72&is=6689cdf2&hm=eea218cfe10e6f2aa2abca1eeaf0ef6c9f690e33e17358a9236721f404b1cccb&');
-        */
-
-color: rgb(219 191 30);
+        padding: 1rem 2rem;  
+        color: rgb(219 191 30);
     }
 
     header h1 {
         margin: 0;
         font-size: 2rem;
         animation: slide-in 1s ease-out forwards;
-        color: rgb(255 255 255); /* Gold color for website name */
+        color: rgb(255 255 255); 
     }
 
     nav ul {
@@ -180,13 +176,13 @@ color: rgb(219 191 30);
     }
 
     nav ul li a {
-        color: gold; /* Gold color for navigation links */
+        color: gold; 
         text-decoration: none;
         transition: color 0.3s;
     }
 
     nav ul li a:hover {
-        color: white; /* Hover effect to white */
+        color: white; 
     }
 
     .header-options {
@@ -196,11 +192,11 @@ color: rgb(219 191 30);
 
     .dropdown {
         position: relative;
-        margin-left: 0.5rem; /* Adjusted margin between buttons */
+        margin-left: 0.5rem; 
     }
 
     .spacer {
-        width: 1rem; /* Space between language dropdown and login button */
+        width: 1rem; 
     }
 
     .dropdown-content {
@@ -213,7 +209,7 @@ color: rgb(219 191 30);
     }
 
     button {
-        background: gold; /* Gold color for buttons */
+        background: gold; 
         color: black;
         padding: 0.5rem 1rem;
         border: none;
@@ -237,7 +233,7 @@ color: rgb(219 191 30);
 
 
     button:hover {
-        background: #daa520; /* Darker gold on hover */
+        background: #daa520; 
     }
 
     .dropdown-content button:hover {

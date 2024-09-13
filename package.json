@@ -11,8 +11,6 @@
     "predev": "npm run clean && npm run lint",
     "dev": "astro dev",
     "preview": "astro preview",
-    "start": "astro dev",
-    "serve": "astro preview",
     "test": "playwright test",
     "test:ui": "playwright test --ui",
     "test:report": "playwright show-report",
