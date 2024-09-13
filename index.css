@@ -1,21 +1,21 @@
 
-/* Container settings */
+
 .container {
-    height: 300px; /* Fixed height for the container */
-    padding: 0; /* Negative padding doesn't work as intended */
+    height: 300px; 
+    padding: 0; 
     margin-bottom: 30px;
     border-radius: 2rem;
 }
 
-/* Wrapper settings */
+
 .slider-wrapper {
     position: relative;
-    max-width: 48rem; /* Maximum width of 48rem */
-    width: 100%; /* 100% width for responsive design */
-    margin: 0 auto; /* Center the wrapper */
+    max-width: 48rem; 
+    width: 100%; 
+    margin: 0 auto; 
 }
 
-/* Slider settings */
+
 .slider {
     display: flex;
     overflow: hidden;
@@ -23,7 +23,7 @@
     border-radius: 2rem;
 }
 
-/* Media settings */
+
 .slider img, .slider video {
     width: 100%; 
     height: 300px; 
@@ -33,7 +33,7 @@
     animation: slide 30s infinite; 
 }
 
-/* Animation settings */
+
 @keyframes slide {
     0%, 12% {
         transform: translateX(0);
@@ -64,24 +64,24 @@
     }
 }
 
-/* Responsive settings */
+
 @media (width <= 768px) {
     .container {
-        height: 200px; /* Adjust height for smaller screens */
+        height: 200px; 
     }
 
     .slider img, .slider video {
-        height: 200px; /* Adjust height for smaller screens */
+        height: 200px; 
     }
 }
 
 @media (width <= 480px) {
     .container {
-        height: 150px; /* Adjust height for smaller screens */
+        height: 150px; 
     }
 
     .slider img, .slider video {
-        height: 150px; /* Adjust height for smaller screens */
+        height: 150px; 
     }
 }
 
@@ -94,10 +94,10 @@
 }
 
 .small-pictures img {
-    width: 200px; /* Increased size */
+    width: 200px; 
     height: auto;
     margin: 15px;
-    transition: transform 0.3s; /* Smooth transition for zoom effect */
+    transition: transform 0.3s; 
 }
 
 .liked-item img {
@@ -108,7 +108,7 @@
 }
 
 .small-pictures img:hover {
-    transform: scale(1.2); /* Zoom-in effect */
+    transform: scale(1.2); 
 }
 
 .golden-box {
@@ -148,15 +148,15 @@
 }
 
 .year-container {
-    display: flex; /* Use flexbox for easier alignment */
-    align-items: center; /* Align items vertically */
+    display: flex; 
+    align-items: center; 
     justify-content: center;
 }
 
 .year-dropdown {
     font-size: 1.2rem;
     padding: 8px;
-    width: 80px; /* Adjust width as necessary */
+    width: 80px; 
     margin-left: 10px;
 }
 
@@ -177,8 +177,8 @@
 }
 
 .special-info {
-    max-width: 300px; /* Adjust width for description */
-    color: white; /* Text color for description */
+    max-width: 300px; 
+    color: white; 
 }
 
 .special-info h3 {
@@ -206,27 +206,27 @@
     padding: 1rem;
     border-radius: 8px;
     overflow: hidden;
-    border: 3px solid transparent; /* Initial transparent border */
+    border: 3px solid transparent; 
     position: relative;
 }
 
 .gold {
-    border-color: #ffd900d2; /* Gold border color */
+    border-color: #ffd900d2; 
 }
 
 .silver {
-    border-color: #b3b1b1d2; /* Silver border color */
+    border-color: #b3b1b1d2; 
 }
 
 .bronze {
-    border-color: #854f19; /* Bronze border color */
+    border-color: #854f19; 
 }
 
 .top-label {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgb(0 0 0 / 70%); /* Semi-transparent background for label */
+    background-color: rgb(0 0 0 / 70%);
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 5px;
@@ -241,7 +241,7 @@
 .movie-details h3 {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
-    color: white; /* Text color */
+    color: white; 
 }
 
 .movie-description {
@@ -252,7 +252,7 @@
 .movie-description p {
     font-size: 1rem;
     line-height: 1.4;
-    color: white; /* Text color */
+    color: white;
 }
 
 .buttons {
@@ -291,7 +291,7 @@
 
 .liked-info {
     flex: 1;
-    color: white; /* Text color */
+    color: white; 
     max-width: 70%;
 }
 
@@ -317,7 +317,7 @@
     line-height: 1.4;
     color: white;
     margin-top: 0.5rem;
-    max-height: 5rem; /* Example: Adjust the max-height to limit the description text */
+    max-height: 5rem; 
     overflow: hidden;
     text-overflow: ellipsis;
 }
