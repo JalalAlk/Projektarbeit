@@ -55,13 +55,6 @@
         transform: translateX(-400%);
     }
 
-    70%, 82% {
-        transform: translateX(-500%);
-    }
-
-    84%, 96% {
-        transform: translateX(0);
-    }
 }
 
 
